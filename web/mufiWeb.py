@@ -3,7 +3,7 @@ from flask_restx import Resource, Api, Namespace
 
 web = Namespace('web')
 
-@Todo.route('')
+@web.route('')
 class webPost(Resource):
     def post(self):
         return {'hello':'world'}
