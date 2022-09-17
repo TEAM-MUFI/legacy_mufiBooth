@@ -14,6 +14,9 @@ api.add_namespace(web,'/web')
 
 api.add_namespace(,'/page')
 
+@app.route('/')
+def index():
+    return render_template('new-2.html')
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=80)

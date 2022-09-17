@@ -1,0 +1,152 @@
+#menu-view {
+    box-sizing: border-box;
+
+/* BG / White */
+background: #FFFFFF;
+/* Stroke / Gray01 */
+border-bottom: 1px solid #E7E7E7;
+}
+
+
+#menu-detail {
+    display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+}
+
+#menu-name h3{
+
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+letter-spacing: -0.6px;
+
+/* Txt/Secondary */
+color: #5D6169;
+}
+
+#menu-info h2{
+    /* Title/ $Headline */
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 28px;
+/* identical to box height, or 140% */
+
+/* Txt/Primary */
+color: #111111;
+
+}
+
+
+
+.menu-description {
+    display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 179px;
+
+width: 312px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+.menu-description h2 {
+    width: 68px;
+height: 20px;
+
+/* Title/ $Subhead-02 */
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
+display: flex;
+align-items: center;
+
+/* Colors Role/ Txt_Primary */
+color: #1D1929;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+.menu-description h3 {
+    width: 65px;
+height: 20px;
+
+/* Body/ $body-01 */
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
+display: flex;
+align-items: center;
+text-align: right;
+letter-spacing: -0.6px;
+
+/* Txt/Secondary */
+color: #5D6169;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+}
+
+
+#button-next {
+    display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 18px 124px;
+
+
+/* Colors Role/Primary */
+background: #000000;
+border-radius: 4px;
+}
+
+#button-next h4 {
+    width: 58px;
+height: 16px;
+
+/* Subtitle/ S2/ B 100% 16px */
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+text-align: center;
+letter-spacing: -0.6px;
+
+/* White */
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+}

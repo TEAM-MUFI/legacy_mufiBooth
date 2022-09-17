@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/m-1.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/css/uikit.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit-icons.min.js"></script>
+    <script type="module" src="/js/setProduct.js"></script>
+    <script src="https://js.tosspayments.com/v1"></script>
+</head>
+<style>
+    #content > div {
+        margin: 60px 0;
+    }
+</style>
+<body>
+    <main class="container" uk-height-viewport="expend: true">
+        <div id="content">
+            <section class="uk-padding-large uk-padding-small@s" uk-height-viewport>
+                <div id="content" class="uk-margin-large uk-width-xlarge@s">
+                    <p>왓섭 페이지 (2)</p>
+                    <div>
+                        <h3>상품 선택</h3>
+                        <div id="set-menu" class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                            <label>
+                                <img src="https://via.placeholder.com/150"/>
+                                <div>
+                                    <input id="amount-4" class="uk-radio" type="radio" name="radio2" checked>
+                                    <span>4컷 포토</span>
+                                </div>
+                            </label>
+                            <label>
+                                <img src="https://via.placeholder.com/150"/>
+                                <div>
+                                    <input id="amount-6" class="uk-radio" type="radio" name="radio2">
+                                    <span>6컷 포토</span>
+                                </div>
+                            </label>
+                            <label></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>매수 선택</h3>
+                        <button id="button-upper">추가</button>
+                        <span id="pic-amount">1</span>
+                        <button id="button-lower">제거</button>
+                        <span>최대10매?</span>
+                    </div>
+                    <div>
+                        <h2 id="final-menu">4컷 포토 - 3,000원</h2>
+                        <h2 id="final-amount">1장 출력</h2>
+                        <h2>총 금액</h2>
+                        <h1 id="final-price">3,000원</h1>
+                    </div>
+                </div>
+                <div>
+                    <button id="pay">결제하기</button>
+                </div>
+            </section>
+            <!--풋터-->
+        </div>
+    </main>
+    <script>
+        let clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 테스트용 클라이언트 키
+        // 2. 초기화
+        let tossPayments = TossPayments(clientKey)
+    </script>
+</body>
+
+
+</html>
