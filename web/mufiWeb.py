@@ -7,3 +7,8 @@ web = Namespace('web')
 class webPost(Resource):
     def post(self):
         return {'hello':'world'}
+
+
+@web.route('/test1')
+def index():
+    return render_template('index.html')
