@@ -1,4 +1,4 @@
-const path = "/img/frame/"
+const path = "/web/frame/"
 
 menu.forEach((item) => {
     // console.log(item);

@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/new-all.css">
-    <link rel="stylesheet" href="/css/new-2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-all.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-2.css')}}">
 </head>
 <body>
     <div id="header">
         <span id="header-back">
-            <img src="/img/m-1/icon-back.svg">
+            <img src="/static/img/m-1/icon-back.svg">
         </span>
         <span id="header-title">프레임 선택</span>
         <span id="header-space"></span>
@@ -22,7 +22,7 @@
             <!-- <div class="content">
                 <div class="menu">
                     <div class="menu-img">
-                        <img src="/img/m-1/film-frame.svg">
+                        <img src="/static/img/m-1/film-frame.svg">
                     </div>
                     <div class="menu-info">
                         <div class="menu-title">
@@ -43,18 +43,18 @@
                     결제하기
                 </span>
                 <span id="pop-close">
-                    <img src="/img/m-1/ico-cancle.png">
+                    <img src="/static/img/m-1/ico-cancle.png">
                 </span>
             </div>
             <div class="pop-info">
                 <span class="pop-title">제품 수량</span>
                 <span id="value-set">
                     <div id="value-down">
-                        <img src="/img/m-1/minus.png">
+                        <img src="/static/img/m-1/minus.png">
                     </div>
                     <div id="value-number">1</div>
                     <div id="value-up">
-                        <img src="/img/m-1/plus.png">
+                        <img src="/static/img/m-1/plus.png">
                     </div>
                 </span>
             </div>
@@ -80,10 +80,10 @@
     let clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 테스트용 클라이언트 키
     let tossPayments = TossPayments(clientKey) // 초기화
 </script>
-<script src="/js/payment.js"></script>
-<script src="/js/index.js"></script>
-<script src="/js/menu.js"></script>
-<script src="/js/setProduct.js"></script>
-<script src="/js/setMenu.js"></script>
-<script src="/js/popup.js"></script>
+<script src="{{ url_for('static', filename='/js/payment.js')}}"></script>
+<script src="{{ url_for('static', filename='/js/index.js')}}"></script>
+<script src="{{ url_for('static', filename='/js/menu.js')}}"></script>
+<script src="{{ url_for('static', filename='/js/setProduct.js')}}"></script>
+<script src="{{ url_for('static', filename='/js/setMenu.js')}}"></script>
+<script src="{{ url_for('static', filename='/js/popup.js')}}"></script>
 </html>

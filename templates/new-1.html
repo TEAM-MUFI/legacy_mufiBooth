@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/new-all.css">
-    <link rel="stylesheet" href="/css/new-1.css">
-    <script src="/js/new-all.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-all.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-1.css')}}">
+    <script src="{{ url_for('static', filename='/js/new-all.js')}}"></script>
 </head>
 <body>
     <div id="main">
         <div id="content-wrap">
             <div class="content">
                 <div id="upper-views">
-                    <img src="img/m-1/films.svg">
+                    <img src="/static/img/m-1/films.svg">
                 </div>
                 <div id="lower-views">
                     <div id="title-space">
@@ -25,7 +25,7 @@
                         <div id="kakaotalk" onclick="kakaoLogin()">
                             <div>
                                 <span>
-                                    <img src="img/m-1/kakao-icon.svg">
+                                    <img src="/static/img/m-1/kakao-icon.svg">
                                 </span>
                                 <span>
                                     <p id="kakao-text">카카오톡으로 로그인</p>

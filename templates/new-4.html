@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/new-all.css">
-    <link rel="stylesheet" href="/css/new-4.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-all.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-4.css')}}">
 </head>
 <body>
     <div id="header">
         <span id="header-back">
-            <img src="/img/m-1/icon-back.svg">
+            <img src="/static/img/m-1/icon-back.svg">
         </span>
         <span id="header-title">프레임 선택</span>
         <span id="header-space"></span>
