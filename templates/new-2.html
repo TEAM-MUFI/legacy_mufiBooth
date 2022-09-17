@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/new-all.css">
+    <link rel="stylesheet" href="/css/new-2.css">
+</head>
+<body>
+    <div id="header">
+        <span id="header-back">
+            <img src="/img/m-1/icon-back.svg">
+        </span>
+        <span id="header-title">프레임 선택</span>
+        <span id="header-space"></span>
+    </div>
+    <div id="main">
+        <div id="content-wrap">
+            <!-- <button id="visible-test" onclick="visible()">안녕하세요 반갑습니다 테스트</button> -->
+            <!-- <div class="content">
+                <div class="menu">
+                    <div class="menu-img">
+                        <img src="/img/m-1/film-frame.svg">
+                    </div>
+                    <div class="menu-info">
+                        <div class="menu-title">
+                            <h4>Dummy</h4>
+                        </div>
+                        <div class="menu-price">
+                            <h5>1장 3,000원</h5>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div id="pop" class="hidden">
+        <div id="pop-screen">
+            <div id="pop-header">
+                <span id="pop-header-title">
+                    결제하기
+                </span>
+                <span id="pop-close">
+                    <img src="/img/m-1/ico-cancle.png">
+                </span>
+            </div>
+            <div class="pop-info">
+                <span class="pop-title">제품 수량</span>
+                <span id="value-set">
+                    <div id="value-down">
+                        <img src="/img/m-1/minus.png">
+                    </div>
+                    <div id="value-number">1</div>
+                    <div id="value-up">
+                        <img src="/img/m-1/plus.png">
+                    </div>
+                </span>
+            </div>
+            <div class="pop-info">
+                <span class="pop-title">주문 금액</span>
+                <span id="pop-price">3,000원</span>
+            </div>
+            <span id="button" onclick="tossPay()">
+                <h4>다음으로</h4>
+            </span>
+        </div>
+    </div>
+    <footer id="footer">
+        <p>무피 · 대표 : 정종현</p>
+        <p>사업장소재지:충청북도 청주시 서원구 무심서로 377-3 서원대학교 인문사회관 b115호 (28674)</p>
+        <p>전화번호: 010-5547-0355</p>
+        <p>사업자등록번호:275-63-00540</p>
+        <p>COPYRIGHT ⓒ MUFI. ALL RIGHTS RESERVED.</p>
+    </footer>
+</body>
+<script src="https://js.tosspayments.com/v1"></script>
+<script>
+    let clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 테스트용 클라이언트 키
+    let tossPayments = TossPayments(clientKey) // 초기화
+</script>
+<script src="/js/payment.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/menu.js"></script>
+<script src="/js/setProduct.js"></script>
+<script src="/js/setMenu.js"></script>
+<script src="/js/popup.js"></script>
+</html>
