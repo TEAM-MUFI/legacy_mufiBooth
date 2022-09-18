@@ -51,7 +51,7 @@
 </body>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-    Kakao.init('358663eb60bea302bb98271877b83a86');
+    Kakao.init('6abcf2194a60780db3934955584dcaa1');
     console.log(Kakao.isInitialized());
     function kakaoLogin() {
         Kakao.Auth.login({
@@ -62,6 +62,7 @@
                     url:'/v2/user/me',
                     success: res => {
                         const kakao_account = res.kakao_account;
+			window.location.href = 'http://54.191.229.56:5000/web/test2'+'?token='+authObj.text;
                         console.log(kakao_account)
                     },
                     fail: error => {

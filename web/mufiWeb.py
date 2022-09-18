@@ -15,9 +15,9 @@ class webRender(Resource):
     def get(self, file):
         return send_file("./static/img/frame/" + file)
 
-@web.route('/frame/<string:핀번호>')
+@web.route('/frame/<string:pin>')
 class webRender(Resource):
-    def get(self, file):
+    def get(self, pin):
         return send_file("./static/img/frame/" + file)
 
 @web.route('/test1')

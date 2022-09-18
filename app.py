@@ -3,6 +3,7 @@ from flask import Flask, render_template, make_response
 from flask_restx import Api, Resource  # Api 구현을 위한 Api 객체 import
 from kiosk.mufiKiosk import kiosk
 from web.mufiWeb import web
+from webserver.WebServer import server
 
 app = Flask(__name__)  # Flask 객체 선언, 파라미터로 어플리케이션 패키지의 이름을 넣어줌.
 app.config['RESTFUL_JSON'] = {'ensure_ascii' : False}
@@ -15,7 +16,7 @@ api.add_namespace(kiosk,'/kiosk')
 
 api.add_namespace(web,'/web')
 
-# api.add_namespace(page,'/page')
+api.add_namespace(server,'/webserver')
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=80)
