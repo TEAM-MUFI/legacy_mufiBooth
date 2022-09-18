@@ -28,7 +28,7 @@ function addMenu(item) {
     
     menuImg.src = path + item.img;
     
-    menuTitleFont.innerText = item.name;
+    menuTitleFont.innerText = "[" + item.size + "컷] " + item.name;
     menuPriceFont.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
     
     content.appendChild(menu);

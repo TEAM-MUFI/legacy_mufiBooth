@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-all.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-2.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/new-all.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css')}}">
 </head>
 <body>
     <div id="header">
@@ -62,6 +62,27 @@
                 <span class="pop-title">주문 금액</span>
                 <span id="pop-price">3,000원</span>
             </div>
+            <div class="pop-rules">
+                <div id="pop-notification">
+                    결제 전
+                    <a id="btn-rule-refund">환불 약관</a>
+                    /
+                    <a id="btn-rule-product">상품 제공 기간</a>
+                    확인 후 진행 바랍니다.
+                </div>
+                <div class="rule hidden" id="rule-refund">
+                    <h4>환불 정책</h4>
+                    <p>포토 상품이 정상적으로 제공되지 않은 경우, 이용자는 환불을 요구할 수 있습니다</p>
+                    <p>환불 신청 72시간 내에, 주문 수단의 환불 혹은 이용자의 계좌로 입금을 원칙으로 하고 있습니다.</p>
+                    <a>닫기</a>
+                </div>
+                <div class="rule hidden" id="rule-product">
+                    <h4>상품 제공 안내</h4>
+                    <p>촬영 직후 출력되는 네컷포토와, 네컷포토 이미지파일을 제공합니다.</p>
+                    <p>이전에 찍은 사진도 로그인 이후 다운로드 가능합니다.</p>
+                    <a>닫기</a>
+                </div>
+            </div>
             <span id="button" onclick="tossPay()">
                 <h4>다음으로</h4>
             </span>
@@ -80,10 +101,11 @@
     let clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 테스트용 클라이언트 키
     let tossPayments = TossPayments(clientKey) // 초기화
 </script>
-<script src="{{ url_for('static', filename='/js/payment.js')}}"></script>
-<script src="{{ url_for('static', filename='/js/index.js')}}"></script>
-<script src="{{ url_for('static', filename='/js/menu.js')}}"></script>
-<script src="{{ url_for('static', filename='/js/setProduct.js')}}"></script>
-<script src="{{ url_for('static', filename='/js/setMenu.js')}}"></script>
-<script src="{{ url_for('static', filename='/js/popup.js')}}"></script>
+<script src="{{ url_for('static', filename='js/payment.js')}}"></script>
+<script src="{{ url_for('static', filename='js/index.js')}}"></script>
 </html>
+<script src="{{ url_for('static', filename='js/menu.js')}}"></script>
+<script src="{{ url_for('static', filename='js/setProduct.js')}}"></script>
+<script src="{{ url_for('static', filename='js/setMenu.js')}}"></script>
+<script src="{{ url_for('static', filename='js/popup.js')}}"></script>
+<script src="{{ url_for('static', filename='js/rule.js')}}"></script>
