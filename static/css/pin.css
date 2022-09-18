@@ -6,6 +6,18 @@ padding: 0px;
 gap: 4px;
 }
 
+#info p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    letter-spacing: -0.6px;
+    margin: 20px;
+    color: #A3A7AE;
+}
+
 .pin-box {
     box-sizing: border-box;
     text-align: center;

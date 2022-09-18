@@ -7,7 +7,7 @@
 }
 
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 
 #main {
@@ -61,14 +61,14 @@ border-bottom: 1px solid #E7E7E7;
 #button {
     display: flex;
     justify-content: center;
-    padding: 18px 124px;
+    padding: 18px 128px;
     margin: 24px;
     background: #000000;
     border-radius: 4px;
 }
 
 #button > h4 {
-    width: 58px;
+    width: 72px;
 height: 16px;
 font-family: 'Spoqa Han Sans Neo';
 font-style: normal;

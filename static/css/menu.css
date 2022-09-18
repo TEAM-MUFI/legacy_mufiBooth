@@ -102,7 +102,6 @@ flex-grow: 0;
 #pop-screen {
     position: fixed;
     width: 100%;
-    height: 280px;
     bottom: 0px;
 
 background-color: white;
@@ -140,6 +139,19 @@ color: #1D1929;
 flex: none;
 order: 0;
 flex-grow: 0;
+}
+
+.pop-rules {
+    justify-content: center;
+    text-align: center;
+}
+
+.pop-rules > div {
+    margin: 20px 0;
+}
+
+#pop-notification {
+    font-size: 0.75rem;
 }
 
 
@@ -256,4 +268,19 @@ margin: 0px -1px;
 
 #value-set {
     display: flex;
+}
+
+
+
+.rule {
+    padding: 12px;
+}
+
+.rule p {
+    font-size: 0.75rem;
+    margin: 12px 0;
+}
+
+a {
+    color:#2ab3e0
 }

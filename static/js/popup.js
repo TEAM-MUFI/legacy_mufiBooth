@@ -35,11 +35,3 @@ popClose.addEventListener("click", hidden);
 window.addEventListener("click", (event) => {
     event.target === pop ? hidden() : false;
 })
-
-
-
-// 모달 on
-// body.style.overflow = 'hidden';
-
-// 모달 off
-// body.style.overflow = 'auto';

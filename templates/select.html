@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-all.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-4.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/new-all.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/select.css')}}">
 </head>
 <body>
     <div id="header">
@@ -18,32 +18,25 @@
     </div>
     <div id="main">
         <div id="content-wrap">
-            <div>
-                <h1>핀번호를 꼭</h1>
-                <h1>기억해주세요!</h1>
+            <div id="upper">
+                <img src="/static/img/m-1/films.svg">
             </div>
-            <div id="pin-wrap">
-                <div class="pin-box">
-                    <h2>Z</h2>
-                </div>
-                <div class="pin-box">
-                    <h2>1</h2>
-                </div>
-                <div class="pin-box">
-                    <h2>2</h2>
-                </div>
-                <div class="pin-box">
-                    <h2>3</h2>
-                </div>
-                <div class="pin-box">
-                    <h2>4</h2>
+            <h2>원하시는 기능을 선택해주세요</h2>
+            <div class="card">
+                <div>
+                    <span class="button">
+                        <h4>사진 촬영하기</h4>
+                    </span>
                 </div>
             </div>
-            <div>
-                <span id="button">
-                    <h4>다운로드</h4>
-                </span>
+            <div class="card">
+                <div>
+                    <span class="button">
+                        <h4>사진 조회하기</h4>
+                    </span>
+                </div>
             </div>
+            
         </div>
     </div>
     <footer id="footer">
@@ -59,7 +52,7 @@
     let clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 테스트용 클라이언트 키
     let tossPayments = TossPayments(clientKey) // 초기화
 </script>
-<script src="{{ url_for('static', filename='/js/payment.js')}}"></script>
-<script src="{{ url_for('static', filename='/js/index.js')}}"></script>
-<script src="{{ url_for('static', filename='/js/pin.js')}}"></script>
+<script src="/js/payment.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/pin.js"></script>
 </html>

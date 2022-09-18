@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-all.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/new-4.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/new-all.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pin.css')}}">
 </head>
 <body>
     <div id="header">
@@ -41,8 +41,11 @@
             </div>
             <div>
                 <span id="button">
-                    <h4>다운로드</h4>
+                    <h4>사진 확인</h4>
                 </span>
+            </div>
+            <div id="info">
+                <p>촬영이 끝나면 직접 휴대폰으로 사진을 확인할 수 있습니다</p>
             </div>
         </div>
     </div>
@@ -59,7 +62,7 @@
     let clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 테스트용 클라이언트 키
     let tossPayments = TossPayments(clientKey) // 초기화
 </script>
-<script src="/js/payment.js"></script>
-<script src="/js/index.js"></script>
-<script src="/js/pin.js"></script>
+<script src="{{ url_for('static', filename='js/payment.js')}}"></script>
+<script src="{{ url_for('static', filename='js/index.js')}}"></script>
+<script src="{{ url_for('static', filename='js/pin.js')}}"></script>
 </html>
