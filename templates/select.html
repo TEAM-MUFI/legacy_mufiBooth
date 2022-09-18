@@ -10,9 +10,11 @@
 </head>
 <body>
     <div id="header">
-        <span id="header-back">
-            <img src="/static/img/m-1/icon-back.svg">
-        </span>
+        <a href="javascript:history.back();">
+            <span id="header-back">
+                <img src="/static/img/m-1/icon-back.svg">
+            </span>
+        </a>
         <span id="header-title">프레임 선택</span>
         <span id="header-space"></span>
     </div>
@@ -24,16 +26,20 @@
             <h2>원하시는 기능을 선택해주세요</h2>
             <div class="card">
                 <div>
-                    <span class="button">
-                        <h4>사진 촬영하기</h4>
-                    </span>
+                    <a href="/web/menu">
+                        <span class="button">
+                            <h4>사진 촬영하기</h4>
+                        </span>
+                    </a>
                 </div>
             </div>
             <div class="card">
                 <div>
-                    <span class="button">
-                        <h4>사진 조회하기</h4>
-                    </span>
+                    <a href="/web/photo">
+                        <span class="button">
+                            <h4>사진 조회하기</h4>
+                        </span>
+                    </a>
                 </div>
             </div>
             
