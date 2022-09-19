@@ -25,12 +25,18 @@ class webRender(Resource):
     def get(self):
         return make_response(render_template('signin.html'))
 
-# @web.route('/signin/<><><>', methods=['GET']) #로그인성공후
-# class webRender(Resource):
-#     def get(self):
-#         # code_receive = request.args.get('name_give')
-#         print(request.args)
-#         return redirect(f'/webserver/oauth')
+
+@web.route('/id') #사진 촬영/조회 선택 페이지
+class webRender(Resource):
+    def get(self):
+        return make_response(render_template('id.html'))
+
+
+@web.route('/idrequest', methods=['POST']) #로그인성공후
+class webRender(Resource):
+    def get(self):
+        #ㅁㄴㅇㄹ
+        return #
 
 @web.route('/select') #사진 촬영/조회 선택 페이지
 class webRender(Resource):

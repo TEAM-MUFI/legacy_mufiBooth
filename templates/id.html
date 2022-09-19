@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/new-all.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/id.css')}}">
+    <script src="{{ url_for('static', filename='js/new-all.js')}}"></script>
+</head>
+<body>
+    <div id="main">
+        <div id="content-wrap">
+            <div class="content">
+                <div id="upper-views">
+                    <img src="/static/img/m-1/films.svg">
+                </div>
+                <div id="lower-views">
+                    <div id="title-space">
+                        <h1 id="title-main">내 손안의 사진관 무피 📷</h1>
+                        <h3 id="title-sub">무인 사진관 QR코드로 간편하게 사용하세요!</h3>
+                    </div>
+                    <div id="login">
+                        <form action="/idrequest" method="post">
+                            <div>
+                                <span>ID</span>
+                                <span>
+                                    <input class="input-info" type="text" name="id"/>
+                                </span>
+                            </div>
+                            <div>
+                                <span>PW</span>
+                                <span>
+                                    <input class="input-info" type="password" name="token"/>
+                                </span>
+                            </div>
+                            <div class="btn-space">
+                                <input type="submit" id="button" value="로그인"/>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <div id="getpic">
+                        <h3>사진 다운로드하기</h3>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+        <p>무피 · 대표 : 정종현</p>
+        <p>사업자등록번호:275-63-00540 사업자정보확인 통신판매업: 제 2021-서울중구-1572</p>
+        <p>사업장소재지:충청북도 청주시 서원구 무심서로 377-3 서원대학교 인문사회관 b115호 (28674)</p>
+        <p>전화번호: 010-5547-0355</p>
+        <p>COPYRIGHT ⓒ MUFI. ALL RIGHTS RESERVED.</p>
+    </footer>
+</body>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+    Kakao.init('6abcf2194a60780db3934955584dcaa1');
+    console.log(Kakao.isInitialized());
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            scope:'profile_nickname, gender, age_range',
+            success: function(authObj) {
+                console.log(authObj)
+                Kakao.API.request({
+                    url:'/v2/user/me',
+                    success: res => {
+                        const kakao_account = res.kakao_account;
+			window.location.href = 'http://54.191.229.56:5000/web/test2'+'?token='+authObj.text;
+                        console.log(kakao_account)
+                    },
+                    fail: error => {
+                        console.log(error)
+                    }
+                });
+            },
+            fail: error => {
+                console.log(error)
+            }
+        })
+    }
+</script>
+</html>
