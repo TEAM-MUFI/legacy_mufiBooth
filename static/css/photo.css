@@ -69,6 +69,10 @@ color: #FFFFFF;
     justify-content: space-between;
 }
 
+#img-export {
+    text-align: center;
+}
+
 #img-export img {
     padding: 12px;
 }

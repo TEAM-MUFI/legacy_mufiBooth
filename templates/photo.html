@@ -30,13 +30,20 @@
                         <div>
                             <h4>사진 보기</h4>
                         </div>
-                        <div>
+                        <div id="button-refresh">
                             <img src="/static/img/m-1/refresh.png" width="32px">
                         </div>
                     </div>
                 </div>
                 <div id="img-export">
-                    <img src="/static/img/frame/CBNU-6-1.png">
+                    <img 
+                        src=
+                        {% if result_img_path %}
+                            "{{result_img_path}}"
+                        {% else %}
+                            '/static/img/frame/Seowon-4.png'
+                        {% endif %}
+                        id = "result-img">
                 </div>
             </div>
             
@@ -50,6 +57,12 @@
         <p>COPYRIGHT ⓒ MUFI. ALL RIGHTS RESERVED.</p>
     </footer>
 </body>
+
 <script src="{{ url_for('static', filename='/js/index.js')}}"></script>
 <script src="{{ url_for('static', filename='/js/photo.js')}}"></script>
+<script>
+    const btnRefresh = document.querySelector("#button-refresh");
+    let path = {{result_img_path}}
+    btnRefresh.addEventListener("click", (path) => {setImg(path)})
+</script>
 </html>

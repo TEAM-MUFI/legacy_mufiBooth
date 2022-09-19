@@ -55,5 +55,5 @@ class webRender(Resource):
 
 @web.route('/photo') #사진 조회 페이지
 class webRender(Resource):
-    def get(self,token):
+    def get(self):
         return make_response(render_template('photo.html'))
