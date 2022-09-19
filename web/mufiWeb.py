@@ -1,4 +1,4 @@
-from flask import request, render_template, send_file, make_response, send_from_directory
+from flask import request, render_template, send_file, make_response, send_from_directory, redirect
 from flask_restx import Resource, Api, Namespace
 from werkzeug.serving import WSGIRequestHandler
 
@@ -14,19 +14,10 @@ class webPost(Resource):
 class webRender(Resource):
     def get(self, file):
         return send_file("./static/img/frame/" + file)
-
-<<<<<<< HEAD
-@web.route('/frame/<string:pin>')
-class webRender(Resource):
-    def get(self, pin):
-        return send_file("./static/img/frame/" + file)
-=======
 # @web.route('/frame/<string:핀번호>')
 # class webRender(Resource):
     # def get(self, file):
         # return send_file("./static/img/frame/" + file)
->>>>>>> b0548a7a0f91b7399fc170b36de31d5ed968837d
-
 @web.route('/signin') #로그인페이지
 class webRender(Resource):
     def get(self):
@@ -37,31 +28,12 @@ class webRender(Resource):
     def get(self):
         return make_response(render_template('select.html'))
 
-@web.route('/menu') #상품 메뉴 페이지(프레임 선택 페이지)
-class webRender(Resource):
-    def get(self):
-        return make_response(render_template('menu.html'))
-
-@web.route('/success') #결제 성공 페이지
-class webRender(Resource):
-    def get(self):
-        return make_response(render_template('success.html'))
-
 @web.route('/pin') #핀 번호 발급 페이지
 class webRender(Resource):
     def get(self):
-<<<<<<< HEAD
-        return make_response(render_template('new-5.html'))
-=======
         return make_response(render_template('pin.html'))
 
-@web.route('/fail') #결제 실패 페이지
+@web.route('/photo/<string:token>') #사진 조회 페이지
 class webRender(Resource):
-    def get(self):
-        return make_response(render_template('fail.html'))
-
-@web.route('/photo') #사진 조회 페이지
-class webRender(Resource):
-    def get(self):
+    def get(self,token):
         return make_response(render_template('photo.html'))
->>>>>>> b0548a7a0f91b7399fc170b36de31d5ed968837d

@@ -7,6 +7,14 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/new-all.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css')}}">
+    <script>
+        $(document).ready(function(){
+            if ("{{session['id']}}" == ""){
+                alert("올바른 경로가 아닙니다!!");
+                window.location.href = "http://54.191.229.56:5000/web/signin";
+            }
+        });
+    </script>
 </head>
 <body>
     <div id="header">
