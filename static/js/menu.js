@@ -4,14 +4,14 @@ let menu = [
             frame: "",
             size: 4,
             price: 3000,
-            img: "Seowon-4.png"
+            img: "4-white.png"
     },
     {
         name: "아늑하고 우아한 사진",
         frame: "",
         size: 6,
         price: 4000,
-        img: "CBNU-6-2.png"
+        img: "6-white.png"
     },
     // {
     //     name: "서원대학교",
