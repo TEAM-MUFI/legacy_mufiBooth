@@ -130,10 +130,6 @@ color: #000000;
 }
 
 #content-wrap > div {
-    margin: 70px 0;
-    justify-content: center;
-}
-
-#info {
     margin: 32px 0;
+    justify-content: center;
 }

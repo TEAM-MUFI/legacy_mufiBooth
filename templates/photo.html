@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/new-all.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/afterpay.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/photo.css')}}">
 </head>
 <body>
     <div id="header">
@@ -24,8 +24,18 @@
                 <h2>사진 보기</h2>
                 <p>완성한 네컷 포토를 휴대폰에서 볼 수 있습니다</p>
             </div>
-            <div class="card">
+            <div id="img-space">
                 <div>
+                    <div id="img-nav">
+                        <div>
+                            <h4>사진 보기</h4>
+                        </div>
+                        <div>
+                            <img src="/static/img/m-1/refresh.png" width="32px">
+                        </div>
+                    </div>
+                </div>
+                <div id="img-export">
                     <img src="/static/img/frame/CBNU-6-1.png">
                 </div>
             </div>
@@ -40,6 +50,6 @@
         <p>COPYRIGHT ⓒ MUFI. ALL RIGHTS RESERVED.</p>
     </footer>
 </body>
-<script src="/js/index.js"></script>
-<script src="/js/pin.js"></script>
+<script src="{{ url_for('static', filename='/js/index.js')}}"></script>
+<script src="{{ url_for('static', filename='/js/photo.js')}}"></script>
 </html>

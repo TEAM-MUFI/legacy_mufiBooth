@@ -10,25 +10,46 @@
 </head>
 <body>
     <div id="header">
+        <span></span>
         <span id="header-title">결제 성공</span>
+        <span></span>
     </div>
     <div id="main">
         <div id="content-wrap">
-            <div id="upper">
-                <img src="/static/img/m-1/films.svg">
+            <div id="info">
+                <h1>결제가 완료되었습니다</h1>
+            </div>
+            <div>
+                <h2>핀 번호를 꼭</h2>
+                <h2>기억해주세요!</h2>
+            </div>
+            <div id="pin-wrap">
+                <div class="pin-box">
+                    <h2>Z</h2>
+                </div>
+                <div class="pin-box">
+                    <h2>1</h2>
+                </div>
+                <div class="pin-box">
+                    <h2>2</h2>
+                </div>
+                <div class="pin-box">
+                    <h2>3</h2>
+                </div>
+                <div class="pin-box">
+                    <h2>4</h2>
+                </div>
+            </div>
+            <div>
+                <a href="/web/photo">
+                    <span id="button">
+                        <h4>사진 확인</h4>
+                    </span>
+                </a>
             </div>
             <div id="info">
-                <h2>결제가 완료되었습니다</h2>
                 <p>핀 번호를 발급받아 사진을 촬영하실 수 있습니다</p>
-            </div>
-            <div class="card">
-                <div>
-                    <a href="/web/pin">
-                        <span class="button">
-                            <h4>핀 번호 발급받기</h4>
-                        </span>
-                    </a>
-                </div>
+                <p>촬영이 끝나면 직접 휴대폰으로 사진을 확인할 수 있습니다</p>
             </div>
         </div>
     </div>
@@ -40,6 +61,6 @@
         <p>COPYRIGHT ⓒ MUFI. ALL RIGHTS RESERVED.</p>
     </footer>
 </body>
-<script src="/js/index.js"></script>
-<script src="/js/pin.js"></script>
+<script src="{{ url_for('static', filename='js/index.js')}}"></script>
+<script src="{{ url_for('static', filename='js/pin.js')}}"></script>
 </html>

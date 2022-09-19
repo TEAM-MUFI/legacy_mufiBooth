@@ -53,7 +53,7 @@ class webRender(Resource):
     def get(self):
         return make_response(render_template('pin.html'))
 
-@web.route('/photo/<string:token>') #사진 조회 페이지
+@web.route('/photo') #사진 조회 페이지
 class webRender(Resource):
     def get(self,token):
         return make_response(render_template('photo.html'))
