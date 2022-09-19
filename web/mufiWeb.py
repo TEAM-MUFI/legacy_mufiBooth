@@ -19,11 +19,16 @@ class webRender(Resource):
 # class webRender(Resource):
     # def get(self, pin):
         # return send_file("./static/img/frame/" + file)
-        
+
 @web.route('/signin') #로그인페이지
 class webRender(Resource):
     def get(self):
         return make_response(render_template('signin.html'))
+
+@web.route('/menu') #로그인페이지
+class webRender(Resource):
+    def get(self):
+        return make_response(render_template('menu.html'))
 
 
 @web.route('/id') #사진 촬영/조회 선택 페이지
