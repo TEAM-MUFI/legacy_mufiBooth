@@ -58,11 +58,11 @@
             scope:'profile_nickname, gender, age_range',
             success: function(authObj) {
                 console.log(authObj)
-                Kakao.API.request({
+		Kakao.API.request({
                     url:'/v2/user/me',
                     success: res => {
                         const kakao_account = res.kakao_account;
-			window.location.href = 'http://54.191.229.56:5000/web/test2'+'?token='+authObj.text;
+			window.location.href = 'http://54.191.229.56:5000/webserver/oauth/'+res.id+'/'+kakao_account.profile.nickname+'/'+kakao_account.age_range+'/'+kakao_account.gender;
                         console.log(kakao_account)
                     },
                     fail: error => {

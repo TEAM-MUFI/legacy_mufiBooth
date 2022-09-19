@@ -18,6 +18,3 @@ class MufiData:
     def selectdb(self, sql):
         self.__cursor.execute(sql)
         return self.__cursor.fetchall()
-
-mf = MufiData()
-print(mf)
