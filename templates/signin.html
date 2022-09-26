@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title> mufibooth </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,6 +38,13 @@
                     <!-- <div id="getpic">
                         <h3>사진 다운로드하기</h3>
                     </div> -->
+		    <div id="user-login">
+                        <div>
+                            <a href="http://www.muinfilm.shop/webserver/id">
+                                <p>일반 로그인</p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,14 +63,14 @@
     console.log(Kakao.isInitialized());
     function kakaoLogin() {
         Kakao.Auth.login({
-            scope:'profile_nickname, gender, age_range',
+            scope:'profile_nickname, gender, age_range, talk_message',
             success: function(authObj) {
                 console.log(authObj)
 		Kakao.API.request({
                     url:'/v2/user/me',
                     success: res => {
                         const kakao_account = res.kakao_account;
-			window.location.href = 'http://54.191.229.56:5000/webserver/oauth/'+res.id+'/'+kakao_account.profile.nickname+'/'+kakao_account.age_range+'/'+kakao_account.gender;
+			window.location.href = 'http://www.muinfilm.shop/webserver/oauth/'+res.id+'/'+kakao_account.profile.nickname+'/'+kakao_account.age_range+'/'+kakao_account.gender+"/"+kakao_account.talk_message;
                         console.log(kakao_account)
                     },
                     fail: error => {

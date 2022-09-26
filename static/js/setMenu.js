@@ -27,9 +27,15 @@ function addMenu(item) {
     
     
     menuImg.src = path + item.img;
-    
-    menuTitleFont.innerText = "[" + item.size + "컷] " + item.name;
-    menuPriceFont.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
+
+	if(item.size == 4){
+    		menuTitleFont.innerText = "[" + item.size + "컷] " + item.name;
+    		menuPriceFont.innerText = "1+1장 " + item.price.toLocaleString('ko-KR') + "원";
+	}
+	else{
+		menuTitleFont.innerText = "[" + item.size + "컷] " + item.name;
+                menuPriceFont.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
+	}
     
     content.appendChild(menu);
     menu.appendChild(menuImgDiv);
@@ -55,6 +61,4 @@ btnProduct.forEach((target) => target.addEventListener("click", popOn));
 
 
 console.log(btnProduct)
-
-
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title> mufibooth </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,7 +12,7 @@
         $(document).ready(function(){
             if ("{{session['id']}}" == ""){
                 alert("올바른 경로가 아닙니다!!");
-                window.location.href = "http://54.191.229.56:5000/web/signin";
+                window.location.href = "http://www.muinfilm.shop/webserver/signin";
             }
         });
     </script>
@@ -71,7 +72,7 @@
             </div>
             <div class="pop-info">
                 <span class="pop-title">주문 금액</span>
-                <span id="pop-price">3,000원</span>
+                <span id="pop-price">6,000원</span>
             </div>
             <div class="pop-rules">
                 <div id="pop-notification">
@@ -97,7 +98,7 @@
                     <a>닫기</a>
                 </div>
             </div>
-            <span id="button" onclick="tossPay()">
+	    <span id="button" onclick="tossPay('{{name}}')">
                 <h4>다음으로</h4>
             </span>
         </div>

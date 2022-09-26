@@ -25,35 +25,13 @@ class webRender(Resource):
     def get(self):
         return make_response(render_template('signin.html'))
 
-@web.route('/menu') #로그인페이지
-class webRender(Resource):
-    def get(self):
-        return make_response(render_template('menu.html'))
+@web.route('/picture/<string:name>')
+class picture(Resource):
+    def get(self,name):
+        return send_file("./picture/"+name)
 
+@web.route('/subphoto/<string:name>')
+class subphoto(Resource):
+    def get(self,name):
+        return send_file("picture/"+name)
 
-@web.route('/id') #사진 촬영/조회 선택 페이지
-class webRender(Resource):
-    def get(self):
-        return make_response(render_template('id.html'))
-
-
-@web.route('/idrequest', methods=['POST']) #로그인성공후
-class webRender(Resource):
-    def get(self):
-        #ㅁㄴㅇㄹ
-        return #
-
-@web.route('/select') #사진 촬영/조회 선택 페이지
-class webRender(Resource):
-    def get(self):
-        return make_response(render_template('select.html'))
-
-@web.route('/pin') #핀 번호 발급 페이지
-class webRender(Resource):
-    def get(self):
-        return make_response(render_template('pin.html'))
-
-@web.route('/photo') #사진 조회 페이지
-class webRender(Resource):
-    def get(self,token):
-        return make_response(render_template('photo.html'))

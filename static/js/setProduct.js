@@ -20,7 +20,7 @@ let purchase = {
     name: "",
     size: 4,
     amount: 1,
-    totalPrice: 3000
+    totalPrice: 6000
 }
 
 function popOn(event) {
@@ -30,9 +30,12 @@ function popOn(event) {
     popPrice.innerText = matched.price.toLocaleString('ko-KR') + "원";
     purchase.name = matched.name;
     purchase.amount = 1;
+	purchase.size = matched.size;
+	purchase.totalPrice = matched.price;
     document.querySelector("#value-number").innerText = "1";
     visible();
 }
+
 
 function setPrice() {
     const matchedValue = menu.find(element => element.name === purchase.name);
@@ -59,8 +62,6 @@ function setAmount (value) {
     }
     setPrice();
 }
-
-
 
 
 // pay.addEventListener("click", tossPay);

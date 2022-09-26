@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title> mufibooth </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -25,19 +26,28 @@
                 <p>완성한 네컷 포토를 휴대폰에서 볼 수 있습니다</p>
             </div>
             <div id="img-space">
+		<center>
                 <div>
                     <div id="img-nav">
-                        <div>
-                            <h4>사진 보기</h4>
-                        </div>
-                        <div>
-                            <img src="/static/img/m-1/refresh.png" width="32px">
-                        </div>
+                        사진첩
                     </div>
                 </div>
-                <div id="img-export">
-                    <img src="/static/img/frame/CBNU-6-1.png">
-                </div>
+		</center>
+		<center>
+		<div id="img-export">
+		{% block content %}
+                	{% if photo != [] %}
+                        	{% for i in range(count) %}
+					<img src="../../web/picture/{{photo[i]}}.png" width="70%"
+						{% if subcheck == 1 %}
+							onclick="location.href='http://www.muinfilm.shop/webserver/subphoto/{{order[i]}}'"
+						{% endif %}>
+
+                        	{% endfor %}
+                	{% endif %}
+		{% endblock %}
+		</div>
+		</center>
             </div>
             
         </div>
@@ -51,5 +61,4 @@
     </footer>
 </body>
 <script src="{{ url_for('static', filename='/js/index.js')}}"></script>
-<script src="{{ url_for('static', filename='/js/photo.js')}}"></script>
 </html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title> mufibooth </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -20,28 +21,29 @@
                 <h1>결제가 완료되었습니다</h1>
             </div>
             <div>
+		<h2>{{pin}}</h2>
                 <h2>핀 번호를 꼭</h2>
                 <h2>기억해주세요!</h2>
             </div>
             <div id="pin-wrap">
                 <div class="pin-box">
-                    <h2>Z</h2>
+			<h2>{{pin1}}</h2>
                 </div>
                 <div class="pin-box">
-                    <h2>1</h2>
+			<h2>{{pin2}}</h2>
                 </div>
                 <div class="pin-box">
-                    <h2>2</h2>
+			<h2>{{pin3}}</h2>
                 </div>
                 <div class="pin-box">
-                    <h2>3</h2>
+			<h2>{{pin4}}</h2>
                 </div>
                 <div class="pin-box">
-                    <h2>4</h2>
+			<h2>{{pin5}}</h2>
                 </div>
             </div>
             <div>
-                <a href="/web/photo">
+                <a href="/webserver/photo/main">
                     <span id="button">
                         <h4>사진 확인</h4>
                     </span>
@@ -62,5 +64,4 @@
     </footer>
 </body>
 <script src="{{ url_for('static', filename='js/index.js')}}"></script>
-<script src="{{ url_for('static', filename='js/pin.js')}}"></script>
 </html>

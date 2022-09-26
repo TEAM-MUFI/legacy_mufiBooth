@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title> mufibooth </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +23,7 @@
                         <h3 id="title-sub">무인 사진관 QR코드로 간편하게 사용하세요!</h3>
                     </div>
                     <div id="login">
-                        <form action="/idrequest" method="post">
+                        <form action="/webserver/id/server">
                             <div>
                                 <span>ID</span>
                                 <span>
@@ -36,7 +37,7 @@
                                 </span>
                             </div>
                             <div class="btn-space">
-                                <input type="submit" id="button" value="로그인"/>
+                                <input type="submit"  id="button" value="로그인"/>
                             </div>
                         </form>
                     </div>
@@ -68,7 +69,7 @@
                     url:'/v2/user/me',
                     success: res => {
                         const kakao_account = res.kakao_account;
-			window.location.href = 'http://54.191.229.56:5000/web/test2'+'?token='+authObj.text;
+			window.location.href = 'http://www.muinfilm.shop/webserver/success'+'?token='+authObj.text;
                         console.log(kakao_account)
                     },
                     fail: error => {
