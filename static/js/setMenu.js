@@ -30,7 +30,7 @@ function addMenu(item) {
 
 	if(item.size == 4){
     		menuTitleFont.innerText = "[" + item.size + "컷] " + item.name;
-    		menuPriceFont.innerText = "1+1장 " + item.price.toLocaleString('ko-KR') + "원";
+    		menuPriceFont.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
 	}
 	else{
 		menuTitleFont.innerText = "[" + item.size + "컷] " + item.name;

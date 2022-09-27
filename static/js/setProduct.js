@@ -20,7 +20,7 @@ let purchase = {
     name: "",
     size: 4,
     amount: 1,
-    totalPrice: 6000
+    totalPrice: 3000
 }
 
 function popOn(event) {
@@ -29,10 +29,20 @@ function popOn(event) {
     console.log(matched);
     popPrice.innerText = matched.price.toLocaleString('ko-KR') + "원";
     purchase.name = matched.name;
-    purchase.amount = 1;
-	purchase.size = matched.size;
-	purchase.totalPrice = matched.price;
-    document.querySelector("#value-number").innerText = "1";
+	console.log("size:" + matched.size);
+	if(matched.size ==4){
+		purchase.amount = 2;
+	console.log("2");
+	}
+	else{
+		purchase.amount = 1;
+		console.log("1");
+	}
+    purchase.size = matched.size;
+    purchase.totalPrice = matched.price * purchase.amount;
+	finalPrice.innerText = purchase.totalPrice.toLocaleString('ko-KR') + "원";
+    picAmount.innerText = purchase.amount;
+    document.querySelector("#value-number").innerText = purchase.amount;
     visible();
 }
 
@@ -56,7 +66,7 @@ function setPicture(event) {
 
 function setAmount (value) {
     const newAmount = Number(picAmount.innerText) + value;
-    if(newAmount > 0 && newAmount < 11) {
+	if(newAmount > 0 && newAmount < 11) {
         picAmount.innerText = newAmount;
         purchase.amount = newAmount;
     }
@@ -67,8 +77,14 @@ function setAmount (value) {
 // pay.addEventListener("click", tossPay);
 
 
-btnUpper.addEventListener("click", () => setAmount(1));
-btnLower.addEventListener("click", () => setAmount(-1));
+btnUpper.addEventListener("click", () => {
+        if (purchase.size == 4){ setAmount(2);}
+	else {setAmount(1);}
+        });
+btnLower.addEventListener("click", () => {
+	if (purchase.size == 4){ setAmount(-2);}
+        else {setAmount(-1);}
+        });
 
 // amount4.addEventListener("click", setPicture);
 // amount6.addEventListener("click", setPicture);

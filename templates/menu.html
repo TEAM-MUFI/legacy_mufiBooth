@@ -8,14 +8,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/new-all.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css')}}">
-    <script>
-        $(document).ready(function(){
-            if ("{{session['id']}}" == ""){
-                alert("올바른 경로가 아닙니다!!");
-                window.location.href = "http://www.muinfilm.shop/webserver/signin";
-            }
-        });
-    </script>
 </head>
 <body>
     <div id="header">
@@ -118,9 +110,9 @@
 </script>
 <script src="{{ url_for('static', filename='js/payment.js')}}"></script>
 <script src="{{ url_for('static', filename='js/index.js')}}"></script>
-</html>
 <script src="{{ url_for('static', filename='js/menu.js')}}"></script>
 <script src="{{ url_for('static', filename='js/setProduct.js')}}"></script>
 <script src="{{ url_for('static', filename='js/setMenu.js')}}"></script>
 <script src="{{ url_for('static', filename='js/popup.js')}}"></script>
 <script src="{{ url_for('static', filename='js/rule.js')}}"></script>
+</html>

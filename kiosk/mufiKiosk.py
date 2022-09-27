@@ -8,6 +8,7 @@ import json
 import threading
 
 def savePicture(picture, orderid, date, count):
+    md = MufiData()
     pid = date+"_"+orderid+"_"+str(count)
     try:
         with open("picture/"+pid+".png", 'wb') as fs:
@@ -27,7 +28,6 @@ class test(Resource):
 @kiosk.route('/pictures/upload/<string:orderid>/<string:date>/<string:count>')
 class uploadPicture(Resource):
     def post(self,orderid,date,count):
-        md = MufiData()
         threadList = []
         for i in range(int(count)):
             f = request.files['image'+str(i)]

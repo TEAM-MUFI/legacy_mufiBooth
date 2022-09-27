@@ -11,7 +11,9 @@
 </head>
 <body>
     <div id="header">
+        <span></span>
         <span id="header-title">동작 선택</span>
+        <span></span>
     </div>
     <div id="main">
         <div id="content-wrap">
@@ -53,7 +55,6 @@
     let clientKey = 'live_ck_Wd46qopOB89pJ6Aa205rZmM75y0v' // 테스트용 클라이언트 키
     let tossPayments = TossPayments(clientKey) // 초기화
 </script>
-<script src="/js/payment.js"></script>
-<script src="/js/index.js"></script>
-<script src="/js/pin.js"></script>
+<script src="{{ url_for('static', filename='/js/payment.js')}}"></script>
+<script src="{{ url_for('static', filename='/js/index.js')}}"></script>
 </html>

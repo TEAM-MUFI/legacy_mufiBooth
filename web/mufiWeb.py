@@ -34,4 +34,3 @@ class picture(Resource):
 class subphoto(Resource):
     def get(self,name):
         return send_file("picture/"+name)
-
