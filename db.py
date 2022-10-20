@@ -3,8 +3,8 @@ import pymysql
 class MufiData:
     def __init__(self):
         self.__db = pymysql.connect(
-            user='junghun9904', 
-            passwd='kmk20216*', 
+            user='ID', 
+            passwd='PW', 
             host='127.0.0.1', 
             db='mufibooth', 
             charset='utf8'
