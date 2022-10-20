@@ -8,7 +8,7 @@ class TossPay:
         payload = "{\"paymentKey\":\""+paymentkey+"\",\"amount\":"+amount+",\"orderId\":\""+orderid+"\"}"
 
         headers = {
-            'Authorization': "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSOg==",
+            'Authorization': "Basic secreat key to base64 ver",
             'Content-Type': "application/json"
             }
         self.__conn.request("POST", "/v1/payments/confirm", payload,headers)
