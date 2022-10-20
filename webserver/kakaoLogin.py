@@ -3,8 +3,8 @@ import json
 
 class KakaoLogin:
     def __init__(self):
-        self.__cilentKey = "XPCEd81wBQrZdvGLO0AEdmiq8rCAxzg7"
-        self.__restAPI = "1c3149990da4b10646de8c6dbd0bbbe1"
+        self.__cilentKey = "Client Key"
+        self.__restAPI = "RestApi Key"
     def getToken(self,token):
         url = "https://kapi.kakao.com/v1/user/me"
 
