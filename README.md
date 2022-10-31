@@ -2,7 +2,7 @@
 
 ## mufi booth
 
-www.muinfilm.shop/web/signin
+http://www.muinfilm.shop/web/signin
 
 ![KakaoTalk_20221031_181854293](https://user-images.githubusercontent.com/44799091/198984976-ec286eb0-b761-4aba-b169-e99c1d5e839e.jpg)
 ![KakaoTalk_20221031_181854685](https://user-images.githubusercontent.com/44799091/198984980-b3c2ee96-89bb-4fac-b3ba-fbf38b8af65e.jpg)
