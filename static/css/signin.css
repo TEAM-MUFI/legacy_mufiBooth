@@ -1,0 +1,149 @@
+/* #upper-views {
+    position: absolute;
+width: 360px;
+height: 360px;
+left: 0px;
+top: 0px;
+} */
+
+#upper-views > img {
+    width: 100%;
+}
+
+/* #title-space {
+    display: flex;
+} */
+
+/* .content {
+    height: 100vh;
+} */
+
+#main {
+    margin: 0;
+}
+
+#title-space {
+    margin: 24px auto;
+}
+
+#title-main {
+    /* position: absolute;
+width: 245px;
+height: 34px;
+left: calc(50% - 245px/2 + 0.5px);
+top: 427px; */
+
+/* Title/ $Display-01 */
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 1.5rem;
+line-height: 34px;
+align-items: center;
+text-align: center;
+padding: 10px 0;
+
+/* Txt/Primary */
+color: #111111;
+}
+
+#title-sub {
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 400;
+font-size: 1rem;
+line-height: 24px;
+align-items: center;
+text-align: center;
+letter-spacing: -0.6px;
+padding: 10px 0;
+
+/* Txt / Third */
+color: #A3A7AE;
+}
+
+#kakaotalk {
+    background-color: #FFDF00;
+    width: 20rem;
+    height: 3.25rem;
+    border-radius: 4px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+#kakaotalk:hover {
+    cursor: pointer;
+    background-color: #ffe839;;
+}
+
+#kakaotalk > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+}
+
+
+#kakao-text{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    text-align: center;
+    letter-spacing: -0.6px;
+    color: #3B1E1A;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+#getpic {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    letter-spacing: -0.6px;
+    margin: 20px;
+    color: #A3A7AE;
+}
+
+#getpic h3 {
+    font-weight: 400;
+}
+
+#button-back{
+    position: relative;
+}
+
+#user-login p{
+    display: flex;
+    justify-content: center;
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 400;
+font-size: 1rem;
+line-height: 24px;
+align-items: center;
+text-align: center;
+letter-spacing: -0.6px;
+padding: 10px 0;
+width:120px;
+    align-items: center;
+
+/* Txt / Third */
+color: #A3A7AE;
+margin: 12px auto;
+}
+
+#user-login {
+    text-align: center;
+}
+
+#user-login > div {
+    width: 120px;
+    margin: 0 auto;
+}
