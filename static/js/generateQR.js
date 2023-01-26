@@ -1,7 +1,7 @@
 const qrious = require("qrious");
 
 function generateQR(pin, element) {
-    if (!/^\d{4}/.test(pin)) {
+    if (!/^[A-Z]\d{4}/.test(pin)) {
         return;
     }
     const qr = new qrious({
@@ -10,3 +10,4 @@ function generateQR(pin, element) {
         size: 200
     })
 }
+generateQR()
