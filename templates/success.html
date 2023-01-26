@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/new-all.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/afterpay.css')}}">
+
 </head>
 <body>
     <div id="header">
@@ -21,9 +22,14 @@
                 <h1>결제가 완료되었습니다</h1>
             </div>
             <div>
-		<h2>{{pin}}</h2>
+                <h2>{{pin}}</h2>
                 <h2>핀 번호를 꼭</h2>
                 <h2>기억해주세요!</h2>
+            </div>
+            <div id="qr-wrap">
+                <div>
+
+                </div>
             </div>
             <div id="pin-wrap">
                 <div class="pin-box">
@@ -64,4 +70,11 @@
     </footer>
 </body>
 <script src="{{ url_for('static', filename='js/index.js')}}"></script>
+<script src="{{ url_for('static', filename='js/generateQR.js')}}"></script>
+<script>
+    const pin = {{pn|tojson}}
+    const qrWrap = document.querySelector("#qr-wrap");
+    generateQR(pin, qrWrap);
+</script>
+
 </html>
