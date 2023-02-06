@@ -1,0 +1,93 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    border-bottom: 1px solid #DFDFDF;
+    background-color: white;
+}
+
+header > div {
+    margin: 0 12px;
+}
+
+header h1 {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+    min-height: calc(100vh - 48px)
+}
+
+#content {
+    width: 100%;
+    max-width: 640px;
+    padding: 12px 24px;
+}
+
+#content > div {
+    justify-content: center;
+}
+
+footer {
+    height: 120px;
+    background-color: #f4f3f6;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+footer > h4 {
+    color: #646464;
+    padding-bottom: 10px;
+}
+
+footer > p {
+    margin: 10px;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.button {
+    border-radius: 6px;
+    height: 54px;
+    margin: 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #000000;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.kakao {
+    background-color: #FFDF00;
+    color: #3B1E1A;
+}
+
+.kakao:hover {
+    cursor: pointer;
+    background-color: #ffe839;;
+}
+
+.kakao > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+

@@ -1,4 +1,4 @@
-#upper > img {
+#upper {
     width: 100%;
 }
 
@@ -20,26 +20,23 @@ p {
         color: #A3A7AE;
 }
 
-.button {
+/* .button {
     display: flex;
     justify-content: center;
     padding: 18px 72px;
     margin: 24px;
     background: #000000;
     border-radius: 4px;
-}
+} */
 
-.button > h4 {
+/* .button > h4 {
 height: 16px;
 font-family: 'Spoqa Han Sans Neo';
 font-style: normal;
 font-weight: 700;
 font-size: 1rem;
 line-height: 100%;
-/* identical to box height, or 16px */
 text-align: center;
 letter-spacing: -0.6px;
-
-/* White */
 color: #FFFFFF;
-}
+} */

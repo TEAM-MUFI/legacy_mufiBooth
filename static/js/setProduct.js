@@ -9,7 +9,7 @@ const picAmount = document.querySelector("#value-number");
 
 // const finalMenu = document.querySelector("#final-menu");
 // const finalAmount = document.querySelector("#final-amount");
-const finalPrice = document.querySelector("#pop-price");
+const orderPrice = document.querySelector("#order-price-value");
 
 // const pay = document.querySelector("#pay");
 
@@ -19,7 +19,7 @@ const regExpNum = /[0-9]/;
 let purchase = {
     name: "",
     size: 4,
-    amount: 1,
+    amount: 2,
     totalPrice: 3000
 }
 
@@ -27,7 +27,7 @@ function popOn(event) {
     const itemName = event.target.parentNode.parentNode.querySelector(".menu-title > h4").innerText.substr(5);
     const matched = menu.find(item => item.name === itemName);
     console.log(matched);
-    popPrice.innerText = matched.price.toLocaleString('ko-KR') + "원";
+    orderPrice.innerText = matched.price.toLocaleString('ko-KR') + "원";
     purchase.name = matched.name;
 	console.log("size:" + matched.size);
 	if(matched.size ==4){
@@ -40,7 +40,7 @@ function popOn(event) {
 	}
     purchase.size = matched.size;
     purchase.totalPrice = matched.price * purchase.amount;
-	finalPrice.innerText = purchase.totalPrice.toLocaleString('ko-KR') + "원";
+	orderPrice.innerText = purchase.totalPrice.toLocaleString('ko-KR') + "원";
     picAmount.innerText = purchase.amount;
     document.querySelector("#value-number").innerText = purchase.amount;
     visible();
@@ -55,7 +55,7 @@ function setPrice() {
 
     // finalMenu.innerText = purchase.size + "컷 포토 - " + matchedValue.price.toLocaleString('ko-KR') + "원";
     // finalAmount.innerText = purchase.amount + "장 출력";
-    finalPrice.innerText = purchase.totalPrice.toLocaleString('ko-KR') + "원";
+    orderPrice.innerText = purchase.totalPrice.toLocaleString('ko-KR') + "원";
 }
 
 function setPicture(event) {

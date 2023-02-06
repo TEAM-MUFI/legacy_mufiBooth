@@ -1,5 +1,5 @@
 const path = "/web/frame/"
-
+const pathLocal = "/static/img/frame/"
 menu.forEach((item) => {
     // console.log(item);
     addMenu(item);
@@ -7,46 +7,49 @@ menu.forEach((item) => {
 
 
 function addMenu(item) {
-    const contentWrap = document.querySelector("#content-wrap");
-    const content = document.createElement("div");
+    const contentWrap = document.querySelector("#content");
+    // const content = document.createElement("div");
     const menu = document.createElement("div");
     const menuImgDiv = document.createElement("div");
     const menuImg = document.createElement("img");
     const menuInfo = document.createElement("div");
-    const menuTitle = document.createElement("div");
-    const menuTitleFont = document.createElement("h4");
-    const menuPrice = document.createElement("div");
-    const menuPriceFont = document.createElement("h5");
+    const menuTitleDiv = document.createElement("div");
+    const menuTitle = document.createElement("h4");
+    const menuPriceDiv = document.createElement("div");
+    const menuPrice = document.createElement("h5");
     
-    content.classList.add("content");
+    // content.classList.add("content");
     menu.classList.add("menu")
-    menuImgDiv.classList.add("menu-img", "btn-Product");
+    menuImgDiv.classList.add("menu-img");
     menuInfo.classList.add("menu-info");
-    menuTitle.classList.add("menu-title", "btn-Product");
-    menuPrice.classList.add("menu-price", "btn-Product");
-    
-    
-    menuImg.src = path + item.img;
+    menuTitleDiv.classList.add("menu-title");
+    menuPriceDiv.classList.add("menu-price");
+
+
+    menuImgDiv.onclick = popOn;
+    menuTitle.onclick = popOn;
+
+    menuImg.src = pathLocal + item.img;
 
 	if(item.size == 4){
-    		menuTitleFont.innerText = "[" + item.size + "컷] " + item.name;
-    		menuPriceFont.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
+    		menuTitle.innerText = "[" + item.size + "컷] " + item.name;
+    		menuPrice.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
 	}
 	else{
-		menuTitleFont.innerText = "[" + item.size + "컷] " + item.name;
-                menuPriceFont.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
+		menuTitle.innerText = "[" + item.size + "컷] " + item.name;
+                menuPrice.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
 	}
     
-    content.appendChild(menu);
+    // content.appendChild(menu);
     menu.appendChild(menuImgDiv);
     menu.appendChild(menuInfo);
     menuImgDiv.appendChild(menuImg);
-    menuInfo.appendChild(menuTitle);
-    menuInfo.appendChild(menuPrice);
-    menuTitle.appendChild(menuTitleFont);
-    menuPrice.appendChild(menuPriceFont);
+    menuInfo.appendChild(menuTitleDiv);
+    menuInfo.appendChild(menuPriceDiv);
+    menuTitleDiv.appendChild(menuTitle);
+    menuPriceDiv.appendChild(menuPrice);
     
-    contentWrap.appendChild(content);
+    contentWrap.appendChild(menu);
 
 }
 

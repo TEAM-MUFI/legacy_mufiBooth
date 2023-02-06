@@ -1,0 +1,57 @@
+.box-user-photo{
+    margin: 12px 0;
+}
+
+.box-user-photo > div {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 24px;
+}
+
+.user-photo-id {
+    font-weight: 400;
+    font-size: 12px;
+    margin: 4px 0;
+    color: #BBBBBB;
+}
+
+.box-user-photo-info > div {
+    margin: 12px 0;
+}
+
+/* .user-photo-QR {
+    overflow: hidden;
+    background-color: white;
+    width: 96px;
+    height: 96px;
+} */
+
+.user-photo-menu {
+    font-weight: 400;
+    font-size: 14px;
+    /* line-height: 16px; */
+}
+
+.user-photo-code {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* .user-photo-status {
+    border-radius: 18px;
+    width: 48px;
+    height: 12px;
+    padding: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+} */
+
+.box-user-photo-header {
+    /* background-color: aqua; */
+}
+
+.box-user-photo-body {
+    /* background-color: aqua; */
+}
+
