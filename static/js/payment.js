@@ -1,5 +1,11 @@
 function tossPay(name) {
-	const date = new Date; 
+	const date = new Date;
+
+	if(purchase.size === 6){
+		alert("준비중인 상품입니다. \n 다음에 이용해주세요")
+		return;
+	}
+
     tossPayments.requestPayment('카드', {
         amount: purchase.totalPrice,
         orderId: date.getFullYear()+""+(date.getMonth()+1)+""+date.getDate()+""+date.getHours()+""+date.getMinutes()+""+date.getSeconds()+"MFB"+date.getMilliseconds(),
