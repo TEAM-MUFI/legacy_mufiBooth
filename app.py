@@ -28,10 +28,10 @@ api.add_namespace(web,'/web')
 
 api.add_namespace(server,'/webserver')
 
-@api.route('/favicon.ico')
+@api.route('/main')
 class favicon(Resource):
     def get(self):
-        return send_file('favicon.ico')
+        return make_response(render_template('signin.html'))
 
 
 if __name__ =='__main__':
