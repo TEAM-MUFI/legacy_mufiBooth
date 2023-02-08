@@ -112,9 +112,16 @@
 <script src="/static/js/modal.js"></script>
 <script src="/static/js/qrious.js"></script>
 <script>
+<<<<<<< HEAD
+    const pin = "A1234" // {{pn|tojson}} 플라스크 문법 수정 필요
+    const qrWrapArray = document.querySelectorAll(".qr-wrap");
+    qrWrapArray.forEach((element) => {
+        generateQR(pin, element);
+=======
     const box = document.querySelectorAll(".clicker");
     box.forEach((element) => {
         element.addEventListener("click", visible);
+>>>>>>> main
     })
     const pin = "A1234" // {{pn|tojson}} 플라스크 문법 수정 필요
     const qrWrapArray = document.querySelectorAll(".qr-wrap");
