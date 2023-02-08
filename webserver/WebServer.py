@@ -197,7 +197,8 @@ class CouponList(Resource):
     def get(self):
         if 'id' not in session:
             return redirect("http://www.muinfilm.shop/main")
-        sql = """select distinct o.orderid, o.ordername, o.pinnumber, if(p.pictureid is NULL, 1, 0) as used from orders as o left join picture as p on o.orderid=p.orderid where o.userid = '%s'"""%session['id']
+        sql = """
+select o.orderid, o.ordername, o.pinnumber, if (p.pictureid is NULL, 1, pictureid) as used from orders as o left join picture as p on o.orderid=p.orderid where o.userid = '%s'"""%session['id'] + """ group by o.orderid, o.ordername, o.pinnumber, p.pictureid having p.pictureid like '%\\_0' or p.pictureid is NULL;"""
 
         md = MufiData()
         res = md.selectdb(sql)

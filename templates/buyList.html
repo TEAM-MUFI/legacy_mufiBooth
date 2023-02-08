@@ -44,13 +44,18 @@
         <div id="content">
 	    {% block content %}
 	        {% for order in orderList %}
-		   <div class="box-user-photo border-rounded" onclick="visible()">
+		   <div class="box-user-photo border-rounded"
+			{% if order['used'] == '1' %}
+				onclick="visible()"
+			{% else %}
+				onclick="location.href='http://www.muinfilm.shop/webserver/subphoto/{{order['orderid']}}'"
+			{% endif %}
+			>
 			<div class="box-user-photo-header">
 				<div class="user-photo-id">{{order['orderid']}}</div>
-				{% if order['used'] == 1 %}
+				{% if order['used'] == '1' %}
 					<div class="user-photo-status label success">사용 가능</div>
-				{% endif %}
-				{% if order['used'] == 0 %}
+				{% else %}
 					<div class="user-photo-status label fail">사용 완료</div>
                                 {% endif %}
 			</div>
@@ -61,7 +66,13 @@
 				</div>
 				<div>
 					<div class="qr-box-small border-rounded">
-						<img src="https://via.placeholder.com/1600">
+						<img src=
+						     {% if order['used'] == '1' %}
+							"https://via.placeholder.com/1600"
+						     {% else %}
+						     	"../../web/picture/{{order['used']}}.png"
+						     {% endif %}
+						>
 					</div>
 				</div>
 			</div>
