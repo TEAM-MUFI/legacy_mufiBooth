@@ -42,23 +42,32 @@
     </header>
     <main>
         <div id="content">
-            <div class="box-user-photo border-rounded" onclick="visible()">
-                <div class="box-user-photo-header">
-                    <div class="user-photo-id">2019309204830840</div>
-                    <div class="user-photo-status label success">사용 가능</div>
-                </div>
-                <div class="box-user-photo-body">
-                    <div class="box-user-photo-info">
-                        <div class="user-photo-menu">네컷포토 2장</div>
-                        <div class="user-photo-code">DX32G</div>
-                    </div>
-                    <div>
-                        <div class="qr-box-small border-rounded">
-                            <img src="https://via.placeholder.com/1600">
-                        </div>
-                    </div>
-                </div>
-            </div>
+	    {% block content %}
+	        {% for order in orderList %}
+		   <div class="box-user-photo border-rounded" onclick="visible()">
+			<div class="box-user-photo-header">
+				<div class="user-photo-id">{{order['orderid']}}</div>
+				{% if order['used'] == 1 %}
+					<div class="user-photo-status label success">사용 가능</div>
+				{% endif %}
+				{% if order['used'] == 0 %}
+					<div class="user-photo-status label fail">사용 완료</div>
+                                {% endif %}
+			</div>
+			<div class="box-user-photo-body">
+				<div class="box-user-photo-info">
+					<div class="user-photo-menu">{{order['ordername']}}</div>
+					<div class="user-photo-code">{{order['pinnumber']}}</div>
+				</div>
+				<div>
+					<div class="qr-box-small border-rounded">
+						<img src="https://via.placeholder.com/1600">
+					</div>
+				</div>
+			</div>
+		   </div>
+		{% endfor %}
+	    {% endblock %}
         </div>
     </main>
     <footer>
