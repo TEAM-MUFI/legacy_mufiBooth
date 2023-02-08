@@ -161,7 +161,7 @@ class paySuccess(Resource):
             p3 = str(pin[2])
             p4 = str(pin[3])
             p5 = str(pin[4])
-            return make_response(render_template('success.html',pn=pin,pin1=p1,pin2=p2,pin3=p3,pin4=p4,pin5=p5))
+            return make_response(render_template('success.html',pin=pin,pin1=p1,pin2=p2,pin3=p3,pin4=p4,pin5=p5))
 
 
 @server.route('/fail')
@@ -197,9 +197,9 @@ class CouponList(Resource):
     def get(self):
         if 'id' not in session:
             return redirect("http://www.muinfilm.shop/main")
-        sql = """select * from orders where userid ='%s'"""%session['id']
+        sql = """select distinct o.orderid, o.ordername, o.pinnumber, if(p.pictureid is NULL, 1, 0) as used from orders as o left join picture as p on o.orderid=p.orderid; where userid ='%s'"""%session['id']
 
         md = MufiData()
         res = md.selectdb(sql)
 
-        return make_response(render_template('buyList.html'))
+        return make_response(render_template('buyList.html', orderList = res))
