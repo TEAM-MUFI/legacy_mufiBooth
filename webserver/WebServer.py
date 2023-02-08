@@ -12,6 +12,7 @@ import random
 server = Namespace('webserver')
 server.secret_key = 'mufiHome'
 
+
 @server.route('/oauth/<string:token>/<string:name>/<string:age>/<string:gender>/<string:messageid>')
 class signup(Resource):
     def get(self,token,name,age,gender,messageid):
@@ -39,6 +40,7 @@ class signup(Resource):
         session['name'] = name
         return redirect("http://www.muinfilm.shop/webserver/select")
 
+
 @server.route('/select')
 class menu(Resource):
     def get(self):
@@ -58,6 +60,7 @@ class menu(Resource):
         else:
             return redirect("http://www.muinfilm.shop/web/signin")
 
+
 @server.route('/subphoto/<string:orderid>')
 class photo(Resource):
     def get(self,orderid):
@@ -74,6 +77,7 @@ class photo(Resource):
             return make_response(render_template('photo.html',photo=pictureid, order = orderidlist, subcheck=0, count=len(pictureid)))
         else:
             return redirect("http://www.muinfilm.shop/web/signin")
+
 
 @server.route('/photo/main')
 class photo(Resource):
@@ -97,6 +101,7 @@ class photo(Resource):
         else:
             return redirect("http://www.muinfilm.shop/web/signin")
         return {"message":"errorMessage"}
+
 
 @server.route('/payment/fail')
 class payFail(Resource):
@@ -144,6 +149,7 @@ class paySuccess(Resource):
             return redirect("http://www.muinfilm.shop/webserver/fail")
         return "0"
 
+
 @server.route('/success/<string:pin>')
 class paySuccess(Resource):
     def get(self,pin):
@@ -157,15 +163,18 @@ class paySuccess(Resource):
             p5 = str(pin[4])
             return make_response(render_template('success.html',pn=pin,pin1=p1,pin2=p2,pin3=p3,pin4=p4,pin5=p5))
 
+
 @server.route('/fail')
 class payFail(Resource):
     def get(self):
         return make_response(render_template('fail.html'))
 
+
 @server.route('/id')
 class admin(Resource):
     def get(self):
         return make_response(render_template('id.html'))
+
 
 @server.route('/id/server')
 class admin(Resource):
@@ -183,3 +192,14 @@ class admin(Resource):
             session['name'] = "tester"
             return redirect("http://www.muinfilm.shop/webserver/menu")
 
+@server.route('/coupon/list')
+class CouponList(Resource):
+    def get(self):
+        if 'id' not in session:
+            return redirect("http://www.muinfilm.shop/main")
+        sql = """select * from orders where userid ='%s'"""%session['id']
+
+        md = MufiData()
+        res = md.selectdb(sql)
+
+        return make_response(render_template('buyList.html'))
