@@ -93,3 +93,8 @@ div.label {
 h1.title {
     margin: 48px;
 }
+
+.qr-wrap {
+    width: 100%;
+    border-radius: 14px;
+}
