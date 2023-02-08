@@ -44,13 +44,13 @@
         <div id="content">
 	    {% block content %}
 	        {% for order in orderList %}
-		   <div class="box-user-photo border-rounded"
 			{% if order['used'] == '1' %}
-				onclick="visible()"
+			<div class="box-user-photo border-rounded clicker"
+			     onclick="visible()">
 			{% else %}
-				onclick="location.href='http://www.muinfilm.shop/webserver/subphoto/{{order['orderid']}}'"
+			<div class="box-user-photo border-rounded"
+			     onclick="location.href='http://www.muinfilm.shop/webserver/subphoto/{{order['orderid']}}'">
 			{% endif %}
-			>
 			<div class="box-user-photo-header">
 				<div class="user-photo-id">{{order['orderid']}}</div>
 				{% if order['used'] == '1' %}
@@ -107,11 +107,10 @@
     </div>
     
 </body>
-<script src="https://js.tosspayments.com/v1"></script>
 <script src="{{ url_for('static', filename='js/modal.js')}}"></script>
 <script src="/static/js/modal.js"></script>
 <script>
-    const box = document.querySelectorAll(".box-user-photo");
+    const box = document.querySelectorAll(".clicker");
     box.forEach((element) => {
         element.addEventListener("click", visible);
     })
