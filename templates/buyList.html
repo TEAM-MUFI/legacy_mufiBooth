@@ -42,32 +42,32 @@
     </header>
     <main>
         <div id="content">
-	    {% block content %}
-	        {% for order in orderList %}
-		   <div class="box-user-photo border-rounded" onclick="visible()">
-			<div class="box-user-photo-header">
-				<div class="user-photo-id">{{order['orderid']}}</div>
-				{% if order['used'] == 1 %}
-					<div class="user-photo-status label success">사용 가능</div>
-				{% endif %}
-				{% if order['used'] == 0 %}
-					<div class="user-photo-status label fail">사용 완료</div>
-                                {% endif %}
-			</div>
-			<div class="box-user-photo-body">
-				<div class="box-user-photo-info">
-					<div class="user-photo-menu">{{order['ordername']}}</div>
-					<div class="user-photo-code">{{order['pinnumber']}}</div>
-				</div>
-				<div>
-					<div class="qr-box-small border-rounded">
-						<img src="https://via.placeholder.com/1600">
-					</div>
-				</div>
-			</div>
-		   </div>
-		{% endfor %}
-	    {% endblock %}
+        {% block content %}
+            {% for order in orderList %}
+                <div class="box-user-photo border-rounded" onclick="visible()">
+                    <div class="box-user-photo-header">
+                        <div class="user-photo-id">{{order['orderid']}}</div>
+                            {% if order['used'] == 1 %}
+                                <div class="user-photo-status label success">사용 가능</div>
+                            {% endif %}
+                            {% if order['used'] == 0 %}
+                                <div class="user-photo-status label fail">사용 완료</div>
+                            {% endif %}
+                        </div>
+                        <div class="box-user-photo-body">
+                            <div class="box-user-photo-info">
+                                <div class="user-photo-menu">{{order['ordername']}}</div>
+                                <div class="user-photo-code">{{order['pinnumber']}}</div>
+                            </div>
+                            <div>
+                                <div class="qr-box-small border-rounded">
+                                    <canvas class="qr-wrap"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endblock %}
         </div>
     </main>
     <footer>
@@ -89,7 +89,7 @@
             </div> -->
             <div class="modal-body">
                 <div class="qr-box-large border-rounded">
-                    <img src="https://via.placeholder.com/1600">
+                    <canvas class="qr-wrap"></canvas>
                 </div>
             </div>
         </div>
@@ -98,11 +98,14 @@
 </body>
 <script src="https://js.tosspayments.com/v1"></script>
 <script src="{{ url_for('static', filename='js/modal.js')}}"></script>
+<script src="{{ url_for('static', filename='js/qrious.js')}}"></script>
 <script src="/static/js/modal.js"></script>
+<script src="/static/js/qrious.js"></script>
 <script>
-    const box = document.querySelectorAll(".box-user-photo");
-    box.forEach((element) => {
-        element.addEventListener("click", visible);
+    const pin = "A1234" // {{pn|tojson}} 플라스크 문법 수정 필요
+    const qrWrapArray = document.querySelectorAll(".qr-wrap");
+    qrWrapArray.forEach((element) => {
+        generateQR(pin, element);
     })
 </script>
 </html>
