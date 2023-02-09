@@ -192,6 +192,7 @@ class admin(Resource):
             session['name'] = "tester"
             return redirect("http://www.muinfilm.shop/webserver/menu")
 
+
 @server.route('/coupon/list')
 class CouponList(Resource):
     def get(self):
