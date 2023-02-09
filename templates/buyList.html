@@ -46,7 +46,8 @@
 	        {% for order in orderList %}
 			{% if order['used'] == '1' %}
 			<div class="box-user-photo border-rounded clicker"
-			     onclick="visible()">
+			     id="C{{order['pinnumber']}}"
+			     onclick={clickItem("{{order['pinnumber']}}");}>
 			{% else %}
 			<div class="box-user-photo border-rounded"
 			     onclick="location.href='http://www.muinfilm.shop/webserver/subphoto/{{order['orderid']}}'">
@@ -66,13 +67,11 @@
 				</div>
 				<div>
 					<div class="qr-box-small border-rounded">
-						<img src=
-						     {% if order['used'] == '1' %}
-							"https://via.placeholder.com/1600"
-						     {% else %}
-						     	"../../web/picture/{{order['used']}}.png"
-						     {% endif %}
-						>
+						{% if order['used'] == '1' %}
+							<canvas class="qr-wrap" id="{{order['pinnumber']}}"></canvas>
+						{% else %}
+							<img src="../../web/picture/{{order['used']}}.png">
+						{% endif %}
 					</div>
 				</div>
 			</div>
@@ -100,7 +99,7 @@
             </div> -->
             <div class="modal-body">
                 <div class="qr-box-large border-rounded">
-                    <canvas class="qr-wrap"></canvas>
+		<canvas class="qr-wrap" id="qr-modal"></canvas>
                 </div>
             </div>
         </div>
@@ -112,14 +111,19 @@
 <script src="/static/js/modal.js"></script>
 <script src="/static/js/qrious.js"></script>
 <script>
-    const box = document.querySelectorAll(".clicker");
-    box.forEach((element) => {
-        element.addEventListener("click", visible);
-    })
-    const pin = "A1234" // {{pn|tojson}} 플라스크 문법 수정 필요
+
     const qrWrapArray = document.querySelectorAll(".qr-wrap");
     qrWrapArray.forEach((element) => {
+	var pinNumber = element.getAttribute('id');
+	const pin = pinNumber.toString();
         generateQR(pin, element);
     })
+
+    function clickItem(code){
+	    const qrmodal = document.getElementById('qr-modal');
+	    generateQR(code, qrmodal);
+	    visible();
+    }
+
 </script>
 </html>

@@ -2364,9 +2364,6 @@
 
 
 function generateQR(pin, element) {
-    if (!/^[A-Z]\d{4}/.test(pin)) {
-        return;
-    }
     const qr = new QRious({
         element: element,
         value: pin,

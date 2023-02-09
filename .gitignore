@@ -5,3 +5,4 @@ db.py
 webserver/tosspay.py
 webserver/kakaoLogin.py
 picture/
+*.swp

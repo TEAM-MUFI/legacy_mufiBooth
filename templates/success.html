@@ -49,7 +49,7 @@
             </div>
             <div>
                 <div class="qr-box-large border-rounded">
-                    <canvas class="qr-wrap"></canvas>
+			<canvas class="qr-wrap" id="{{pin}}"></canvas>
                 </div>
             </div>
             <div id="pin-wrap">
@@ -70,8 +70,8 @@
                 </div>
             </div>
             <div>
-                <a href="/webserver/photo/main">
-                    <span class="button">사진 확인하기</span>
+                <a href="/webserver/coupon/list">
+                    <span class="button">쿠폰 목록 확인</span>
                 </a>
             </div>
             <div class="text-info">
@@ -92,8 +92,8 @@
 <script src="{{ url_for('static', filename='js/qrious.js')}}"></script>
 <script src="/static/js/qrious.js"></script>
 <script>
-    const pin = "A1234" // {{pn|tojson}} 플라스크 문법 수정 필요
     const qrWrap = document.querySelector(".qr-wrap");
+    const pin = qrWrap.getAttribute('id');
     generateQR(pin, qrWrap);
 </script>
 
