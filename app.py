@@ -12,14 +12,15 @@ from flask import send_file
 
 sys.setrecursionlimit(10**7)
 
-app = Flask(__name__)  # Flask 객체 선언, 파라미터로 어플리케이션 패키지의 이름을 넣어줌.
+app = Flask(__name__)
 app.config['RESTFUL_JSON'] = {'ensure_ascii' : False}
 app.config['JSON_AS_ASCII'] = False
 app.secret_key = 'mufiHome'
-app.config["PERMANENT_SESSION_LIFETIME"]=timedelta(minutes=15)
-cors = CORS(app, resources={r'/kiosk/*': {'origins': '*'}})
 
-api = Api(app)  # Flask 객체에 Api 객체 등록
+app.config["PERMANENT_SESSION_LIFETIME"]=timedelta(minutes=15)  #세션 시간 15분 설정
+cors = CORS(app, resources={r'/kiosk/*': {'origins': '*'}}) # /kiosk에 접속 cors 허용
+
+api = Api(app)
 
 
 api.add_namespace(kiosk,'/kiosk')
