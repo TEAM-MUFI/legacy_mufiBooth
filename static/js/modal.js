@@ -1,6 +1,6 @@
 const modal = document.querySelector(".modal")
 const modalBtnClose = document.querySelector("#modal-btn-close");
-const modalMain = document.querySelector(".modal-main");
+const modalBg = document.querySelector(".modal-bg");
 
 
 
@@ -23,8 +23,8 @@ if(modalBtnClose !== null) {
 //     console.log("clickedd")
 // })
 
-window.addEventListener("click", (event) => {
-    event.target === modal ? hidden() : false;
+modal.addEventListener("click", (event) => {
+    event.target === modalBg ? hidden() : false;
 })
 
 // modal.addEventListener("click", hidden)
