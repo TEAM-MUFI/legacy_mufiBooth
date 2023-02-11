@@ -25,8 +25,8 @@ class cancel(Resource):
             return res
             
         md.insertdb("update orders set state = 0  where orderid = '"+orderId+"';")
-        
-        md.insertdb("""insert into cancelData( paymentkey, lastTransactionKey, method, orderId, approvedAt) values('%s', '%s', '%s', '%s', '%s')"""%(res['paymentkey'], res['lastTransactionKey'], res['method'], res['orderId'], res['approvedAt'] ))
+
+        md.insertdb("""insert into cancelData( paymentkey, lastTransactionKey, method, orderid, approvedAt) values('%s', '%s', '%s', '%s', '%s')"""%(res['paymentKey'], res['lastTransactionKey'], res['method'], res['orderId'], res['approvedAt'] ))
         
         return make_response(json.dumps({'isSuccess': 'True', 'message': 'delete success'}, ensure_ascii=False))
 
