@@ -117,7 +117,7 @@ class paySuccess(Resource):
         paykey = request.args.get("paymentKey")
         orderId = request.args.get("orderId")
         amount = request.args.get("amount")
-        tp =tosspay.TossPay()
+        tp = tosspay.TossPay()
         md = MufiData()
         res = tp.signIn(paykey, amount, orderId)
         res = json.loads(res)
