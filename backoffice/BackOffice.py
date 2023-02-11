@@ -31,7 +31,7 @@ class cancel(Resource):
         return make_response(json.dumps({'isSuccess': 'True', 'message': 'delete success'}, ensure_ascii=False))
 
         
-@boserver.route("/")
+@boserver.route("/search/columnname/<string:columnName>/data/<string:data>")
 class home(Resource):
-    def get(self):
-        return "Hello"
+    def get(self, columnName, data):
+        return make_response(json.dumps({"columnName":columnName, "data":data }))
