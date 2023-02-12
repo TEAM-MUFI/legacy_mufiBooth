@@ -10,13 +10,16 @@ from datetime import timedelta
 from flask_cors import CORS, cross_origin
 import sys
 from flask import send_file
+from keyLoad import KeyLoad
 
 sys.setrecursionlimit(10**7)
 
 app = Flask(__name__)
 app.config['RESTFUL_JSON'] = {'ensure_ascii' : False}
 app.config['JSON_AS_ASCII'] = False
-app.secret_key = 'mufiHome'
+
+key = KeyLoad()
+app.secret_key = key.getSecretKey()
 
 app.config["PERMANENT_SESSION_LIFETIME"]=timedelta(minutes=15)  #세션 시간 15분 설정
 cors = CORS(app, resources={ r'/kiosk/*': {'origins': '*'}, r'/back_office/*': {'origins': '*'} }) # /kiosk에 접속 cors 허용

@@ -8,9 +8,11 @@ import time
 from datetime import datetime
 import json
 import random
+from keyLoad import KeyLoad
 
 server = Namespace('webserver')
-server.secret_key = 'mufiHome'
+key = KeyLoad()
+server.secret_key = key.getSecretKey()
 
 
 @server.route('/oauth/<string:token>/<string:name>/<string:age>/<string:gender>/<string:messageid>')

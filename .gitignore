@@ -2,7 +2,7 @@
 __pycache__/
 venv/
 db.py
-webserver/tosspay.py
 webserver/kakaoLogin.py
 picture/
 *.swp
+secretKey.json
