@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{{ url_for('static', filename='css/backOffice/cancelPage.css')}}" rel="stylesheet" type="text/css" />
+        <title>cancel Page</title>
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <input id="search" type="text" size="30" style="height: 30px; font-size: 20px;">
+                <button style="width: 100px; height: 35px;" onclick='searchAction()'>
+                    확인
+                </button>
+            </div>
+            <div style="height: 5px;" ></div>
+            <div>
+                <input type="radio" name="chk_info" value='pinnumber' checked="checked"> 쿠폰 번호
+                <input type="radio" name="chk_info" value='orderid'> 주문번호
+            </div>
+            <div style="height: 10px;" ></div>
+            <div class = "table-box" style="text-align: center;">
+                <table id='orderTable'>
+                    <tr>
+                        <td width="50"> 번호 </td>
+                        <td width="200"> 주문 상품  </td>
+                        <td width="250"> 주문 번호 </td>
+                        <td width="100"> 쿠폰 번호 </td>
+                        <td width="150"> 사용자 이름 </td>
+                        <td width="60"> 취소 </td>
+                        <td width="80"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+	<div class="black_bg" ></div>
+	<div class="modal_wrap">
+    		<div class="modal_close" onclick='offClick()'><a>close</a></div>
+    		<div class="modal-inner">
+			<label id="orderid"> </label>
+			<label id="pinnumber"> </label>
+			<input id="cancelInput"> </input>
+			<button> 취소  </button>
+    		</div>
+	<div>
+
+        <script>
+            function searchAction(){
+                const SearchList = document.getElementById("search").value;
+                const column = document.getElementsByName('chk_info');
+
+		column.forEach((node) => {
+    			if(node.checked)  {
+					var xhr = new XMLHttpRequest();
+
+                			xhr.open('GET', './search/columnname/'+ node.value +'/data/'+SearchList, true);
+                			xhr.send();
+
+                			xhr.onload = () => {
+                    				//통신 성공
+                    				if (xhr.status == 200) {
+							const table = document.getElementById('orderTable')
+							for(let i=0; i < table.rows.length - 1; i++){
+								table.deleteRow(-1);
+							}
+							var res = JSON.parse(xhr.response);
+							var count = 1;
+							res.forEach((data)=>{
+								const newRow = table.insertRow();
+								
+								const num = newRow.insertCell(0);
+								const ordername = newRow.insertCell(1);
+								const orderid = newRow.insertCell(2);
+								const coupon = newRow.insertCell(3);
+								const name = newRow.insertCell(4);
+								const state = newRow.insertCell(5);
+								const button = newRow.insertCell(6);
+
+								num.innerText = count;
+								ordername.innerText = data['ordername'];
+								orderid.innerText = data['orderid'];
+								coupon.innerText = data['pinnumber'];
+								name.innerText = data['name'];
+								state.innerText = (data['state'] == 1 ) ? 'O' : 'X';
+								const html = "<button onclick={onClick('"+data['orderid']+"','"+data['pinnumber']+"');}> 취소 </button>"
+								button.innerHTML = html;
+								
+								count += 1
+							});
+                    				} else {
+                        			//통신 실패
+                        			console.log("통신 실패");
+                    				}
+                			}
+    				}
+  			});
+            }
+ 
+    	function onClick(orderid, pinnumber) {
+        	document.querySelector('.modal_wrap').style.display ='block';
+        	document.querySelector('.black_bg').style.display ='block';
+		document.getElementById('orderid').innerText = orderid;
+		document.getElementById('pinnumber').innerText = pinnumber;
+
+		console.log(orderid);
+    	}   
+    	function offClick() {
+		document.querySelector('.modal_wrap').style.display ='none';
+        	document.querySelector('.black_bg').style.display ='none';
+    	}
+        </script>
+    </body>
+</html>
