@@ -44,7 +44,10 @@ class getKiosk(Resource):
         md = MufiData()
         sql ="""select * from orders where pinnumber = '%s';"""%pin
         res = md.selectdb(sql)
-        
+
+        if(res[0]['state'] == 0):
+            return make_response(json.dumps({'isSuccess':"취소된 번호 입니다."}, ensure_ascii=False))
+
         ordersCount =len(res)
         if(ordersCount==0):
             return make_response(json.dumps({'isSuccess' :  "False"}))

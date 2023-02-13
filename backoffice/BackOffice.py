@@ -20,7 +20,7 @@ class home(Resource):
 class cancelPage(Resource):
     def post(self):
         if 'username' not in request.form or 'password' not in request.form:
-            return redirect("http://www.muinfilm.shop/back_office")
+            return redirect("https://www.muinfilm.shop/back_office")
             
         if(request.form['username'].find("#") != -1 or request.form['username'].find(";") != -1 or request.form['username'].find("'") != -1 or request.form['username'].find("!") != -1):
             return make_response(json.dumps({'isSuccess': 'False', 'message' : 'please don\'t try hacking'}, ensure_ascii=False))
@@ -40,11 +40,17 @@ class cancelPage(Resource):
 
 @boserver.route("/cancel/orderid/<string:orderId>/reason/<string:reason>")
 class cancel(Resource):
-    def get(self, orderId, reason):
+    def put(self, orderId, reason):
         if 'officeId' not in session:
             return make_response(json.dumps({'isSuccess': 'False', 'message' : 'You\'r not manager try again after Login'}, ensure_ascii=False))
-            
+        
         md = MufiData()
+
+        if(orderId.find("#") != -1 or orderId.find(";") != -1 or orderId.find("'") != -1 or orderId.find("!") != -1):
+            return make_response(json.dumps({'isSuccess': 'False', 'message' : 'please don\'t try hacking'}, ensure_ascii=False))
+
+        if(reason.find("#") != -1 or reason.find(";") != -1 or reason.find("'") != -1 or reason.find("!") != -1):
+            return make_response(json.dumps({'isSuccess': 'False', 'message' : 'please don\'t try hacking'}, ensure_ascii=False))
         
         res = md.selectdb("select paymentkey from pay where orderid = '"+orderId+"';")
         if (len(res) == 0):
@@ -60,7 +66,7 @@ class cancel(Resource):
             
         md.insertdb("update orders set state = 0  where orderid = '"+orderId+"';")
 
-        md.insertdb("""insert into cancelData( paymentkey, lastTransactionKey, method, orderid, approvedAt) values('%s', '%s', '%s', '%s', '%s')"""%(res['paymentKey'], res['lastTransactionKey'], res['method'], res['orderId'], res['approvedAt'] ))
+        md.insertdb("""insert into cancelData( paymentkey, lastTransactionKey, method, orderid, approvedAt, reason, officeid) values('%s', '%s', '%s', '%s', '%s', '%s', '%s')"""%(res['paymentKey'], res['lastTransactionKey'], res['method'], res['orderId'], res['approvedAt'], reason, session['officeId']))
         
         return make_response(json.dumps({'isSuccess': 'True', 'message': 'delete success'}, ensure_ascii=False))
 

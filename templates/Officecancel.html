@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,7 +42,7 @@
 			<label id="orderid"> </label>
 			<label id="pinnumber"> </label>
 			<input id="cancelInput"> </input>
-			<button> 취소  </button>
+			<button onclick={cancelPay()}> 취소</button>
     		</div>
 	<div>
 
@@ -61,12 +61,17 @@
                 			xhr.onload = () => {
                     				//통신 성공
                     				if (xhr.status == 200) {
-							const table = document.getElementById('orderTable')
-							for(let i=0; i < table.rows.length - 1; i++){
-								table.deleteRow(-1);
-							}
 							var res = JSON.parse(xhr.response);
-							var count = 1;
+                                                        var count = 1;
+                                                        if(res.length == 0){
+                                                                alert("검색된 데이터가 없습니다.");
+								return;
+                                                        }
+							const table = document.getElementById('orderTable')
+							var len = table.rows.length -1
+							for(let i=0; i < len; i++){
+								table.deleteRow(1);
+							}
 							res.forEach((data)=>{
 								const newRow = table.insertRow();
 								
@@ -84,27 +89,66 @@
 								coupon.innerText = data['pinnumber'];
 								name.innerText = data['name'];
 								state.innerText = (data['state'] == 1 ) ? 'O' : 'X';
-								const html = "<button onclick={onClick('"+data['orderid']+"','"+data['pinnumber']+"');}> 취소 </button>"
-								button.innerHTML = html;
+								if(data['state'] == 1){
+									const html = "<button onclick={onClick('"+data['orderid']+"','"+data['pinnumber']+"');}> 취소 </button>";
+									button.innerHTML = html;
+								}else{
+									const html = "<button disabled='disabled'> 취소 </button>";
+									button.innerHTML = html;
+								}
 								
 								count += 1
 							});
                     				} else {
                         			//통신 실패
-                        			console.log("통신 실패");
+                        			alert("다시 연결해 주세요");
                     				}
                 			}
     				}
   			});
             }
+
+	function cancelPay(){
+		const orderid = document.getElementById('orderid').innerText;
+		const reason = document.getElementById('cancelInput').value;
+
+		var returnValue = confirm("정말 취소할까요?");
+		if(!returnValue){
+			return;
+		}
+
+		var xhr = new XMLHttpRequest();
+		
+		xhr.open('PUT', './cancel/orderid/'+ orderid +'/reason/'+reason, true);
+		xhr.send();
+
+		xhr.onload = () => {
+			//통신 성공
+			if (xhr.status != 200) {
+				alert("다시 시도해주세요");
+				return;
+			}
+			var res = JSON.parse(xhr.response);
+			if(!('isSuccess' in res)){
+				alert("CODE : " +res['code'] +"\nMESSAGE : "+res['message'] )
+				return;
+			}
+
+			if('True' == res['isSuccess']){
+				alert('성공');
+				offClick();
+			}else{
+				alert('실패');
+			}
+		}
+
+	}
  
     	function onClick(orderid, pinnumber) {
         	document.querySelector('.modal_wrap').style.display ='block';
         	document.querySelector('.black_bg').style.display ='block';
 		document.getElementById('orderid').innerText = orderid;
 		document.getElementById('pinnumber').innerText = pinnumber;
-
-		console.log(orderid);
     	}   
     	function offClick() {
 		document.querySelector('.modal_wrap').style.display ='none';
