@@ -17,10 +17,12 @@ class home(Resource):
         return make_response(render_template('OfficeLogin.html'))
         
 @boserver.route("/mainPage")
-class cancelPage(Resource):
+class mainPage(Resource):
+    def get(self):
+        return redirect("https://www.muinfilm.shop/back_office/")
     def post(self):
         if 'username' not in request.form or 'password' not in request.form:
-            return redirect("https://www.muinfilm.shop/back_office")
+            return redirect("https://www.muinfilm.shop/back_office/")
             
         if(request.form['username'].find("#") != -1 or request.form['username'].find(";") != -1 or request.form['username'].find("'") != -1 or request.form['username'].find("!") != -1):
             return make_response(json.dumps({'isSuccess': 'False', 'message' : 'please don\'t try hacking'}, ensure_ascii=False))
@@ -32,10 +34,33 @@ class cancelPage(Resource):
         res = md.selectdb("select * from branchOffice where officeid = '"+request.form['username']+"' and officepw = '"+request.form['password']+"';")
         
         if(len(res)==0):
-            return redirect("http://www.muinfilm.shop/back_office")
+            return redirect("http://www.muinfilm.shop/back_office/")
             
         session['officeId'] = request.form['username']
         
+        return make_response(render_template('OfficeMain.html'))
+
+
+@boserver.route("/pictures/upload/<string:orderid>/<string:date>/<int:count>")
+class uploadPicture((Resource):
+    def get(self, orderid, date, count):
+        md = MufiData()
+        
+        res = md.selectdb("select * from orders as o join picture as p on o.orderid = p.orderid where o.orderid = '%s'"%(orderid))
+        
+        if(len(res) == 0):
+            return redirect("http://www.muinfilm.shop/back_office/mainPage")
+            
+        date = session['officeId'][:18] + date 
+        
+        return make_response(render_template('uploadFile.html', orderid = orderid, date = date, count = count))
+
+@boserver.route("/cancelPage")
+class cancelPage(Resource):
+    def get(self):
+        if 'officeId' not in session:
+          return make_response(json.dumps({'isSuccess': 'False', 'message' : 'You\'r not manager try again after Login'}, ensure_ascii=False))
+          
         return make_response(render_template('Officecancel.html'))
 
 @boserver.route("/cancel/orderid/<string:orderId>/reason/<string:reason>")
