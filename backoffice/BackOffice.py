@@ -42,13 +42,13 @@ class mainPage(Resource):
 
 
 @boserver.route("/pictures/upload/<string:orderid>/<string:date>/<int:count>")
-class uploadPicture((Resource):
+class uploadPicture(Resource):
     def get(self, orderid, date, count):
         md = MufiData()
         
         res = md.selectdb("select * from orders as o join picture as p on o.orderid = p.orderid where o.orderid = '%s'"%(orderid))
         
-        if(len(res) == 0):
+        if(len(res) != 0):
             return redirect("http://www.muinfilm.shop/back_office/mainPage")
             
         date = session['officeId'][:18] + date 

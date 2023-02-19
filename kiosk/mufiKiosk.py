@@ -45,7 +45,7 @@ class getKiosk(Resource):
         sql ="""select * from orders where pinnumber = '%s';"""%pin
         res = md.selectdb(sql)
 
-        if(res[0]['state'] == 0):
+        if(res['state'] == 0):
             return make_response(json.dumps({'isSuccess':"취소된 번호 입니다."}, ensure_ascii=False))
 
         ordersCount =len(res)
@@ -68,5 +68,3 @@ class getKiosk(Resource):
         else:
             return make_response(json.dumps({'isSuccess' : "True", 'orderName':ordername,'userId':userid,'orderId':orderid}, ensure_ascii=False))
         return make_response(json.dumps({"error":"server error"}))
-
-
