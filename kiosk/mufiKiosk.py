@@ -1,6 +1,7 @@
 from flask import request, make_response
 from flask_restx import Resource, Api, Namespace
 from db import MufiData
+from aws import MufiS3
 from werkzeug.utils import secure_filename
 import os
 import shutil
@@ -9,14 +10,16 @@ import threading
 
 def savePicture(picture, orderid, date, count):
     md = MufiData()
+    s3 = MufiS3()
     pid = date+"_"+orderid+"_"+str(count)
     try:
-        with open("picture/"+pid+".png", 'wb') as fs:
-            shutil.copyfileobj(picture,fs)
+        s3.uploadImage(picture, pid)
         sql ="""insert into picture(pictureid, picturetitle, orderid) values('%s','%s','%s')"""%(pid,count,orderid)
         md.insertdb(sql)
     except:
         return 'Not Save'
+        
+    return 'success'
 
 kiosk = Namespace('kiosk')
 
@@ -30,7 +33,8 @@ class uploadPicture(Resource):
             t.start()
             threadList.append(t)
         for t in threadList:
-            t.join()
+            a = t.join()
+            
         return make_response(json.dumps({"message": "success Upload"}))
 
 @kiosk.route('/pin/<string:pin>')

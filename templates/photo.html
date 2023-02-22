@@ -55,7 +55,7 @@
                             {% if photo != [] %}
                                 {% for i in range(count) %}
                                     <img
-                                        src="../../web/picture/{{photo[i]}}.png"
+                                        src="https://mufi-photo.s3.ap-northeast-2.amazonaws.com/kiosk-photo/{{photo[i]}}.png"
                                         width="70%"
                                         {% if subcheck == 1 %}
                                             onclick="location.href='http://www.muinfilm.shop/webserver/subphoto/{{order[i]}}'"

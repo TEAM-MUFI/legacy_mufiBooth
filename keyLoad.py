@@ -7,6 +7,9 @@ class KeyLoad:
             self.__paymentKey = data["paymentkey"]
             self.__kakaokey = data["kakaoKey"]
             self.__secretKey = data["secretKey"]
+            self.__awsAccessKey = data["AWS_ACCESS_KEY"]
+            self.__awsSecretAccessKey = data["AWS_SECRET_ACCESS_KEY"]
+            self.__awsRegion = data["AWS_DEFAULT_REGION"]
             
     def getPeymentKey(self):
         return self.__paymentKey
@@ -16,3 +19,12 @@ class KeyLoad:
         
     def getKakaoKey(self):
         return self.__kakaoKey
+        
+    def getAwsKey(self):
+        return self.__awsAccessKey
+        
+    def getAwsSecretKey(self):
+        return self.__awsSecretAccessKey
+        
+    def getAwsRegion(self):
+        return self.__awsRegion
