@@ -20,11 +20,6 @@ def savePicture(picture, orderid, date, count):
 
 kiosk = Namespace('kiosk')
 
-@kiosk.route('')
-class test(Resource):
-    def get(self):
-        return{'hi':'hello'}
-
 @kiosk.route('/pictures/upload/<string:orderid>/<string:date>/<string:count>')
 class uploadPicture(Resource):
     def post(self,orderid,date,count):
@@ -45,12 +40,12 @@ class getKiosk(Resource):
         sql ="""select * from orders where pinnumber = '%s';"""%pin
         res = md.selectdb(sql)
 
-        if(res['state'] == 0):
-            return make_response(json.dumps({'isSuccess':"취소된 번호 입니다."}, ensure_ascii=False))
-
         ordersCount =len(res)
         if(ordersCount==0):
             return make_response(json.dumps({'isSuccess' :  "False"}))
+
+        if(res[0]['state'] == 0):
+            return make_response(json.dumps({'isSuccess':"취소된 번호 입니다."}, ensure_ascii=False))
 
         ordername = res[0]['ordername']
         orderid = res[0]['orderid']

@@ -89,7 +89,7 @@ class photo(Resource):
             orderidlist = []
             pictureid=[]
             md = MufiData()
-            sql ="""select * from orders where userid ='%s'"""%session['id']
+            sql ="""select * from orders where state = 1 and userid ='%s'"""%session['id']
             res = md.selectdb(sql)
             for i in res:
                 orderid.append(i['orderid'])
