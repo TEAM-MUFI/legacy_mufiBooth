@@ -15,17 +15,27 @@ key = KeyLoad()
 server.secret_key = key.getSecretKey()
 
 
-@server.route('/oauth/<string:token>/<string:name>/<string:age>/<string:gender>/<string:messageid>')
+@server.route('/oauth/<string:token>/<string:name>/<string:age>/<string:gender>/<string:messageid>/<string:accessToken>')
 class signup(Resource):
-    def get(self,token,name,age,gender,messageid):
+    def get(self,token,name,age,gender,messageid, accessToken):
         md = MufiData()
+        
+        kakao = kakaoLogin.KakaoLogin()
+        res = kakao.getToken(accessToken)
+        res = json.loads(res.text)
+        
+        if 'id' not in res:
+            return redirect("https://www.muinfilm.shop/main")
+        if (str(res['id']) != token):
+            return redirect("https://www.muinfilm.shop/main")
+        
         userid =""
         data = md.selectdb("select * from user where token = '"+ token +"';")
         for i in data:
             userid = i['userid']
             session['id'] = i['userid']
             session['name'] = i['name']
-            return redirect("http://www.muinfilm.shop/webserver/select") 
+            return redirect("https://www.muinfilm.shop/webserver/select")
         userid = datetime.now().strftime('%Y%m%d%H%M%S')
         userid += "MF"+str(int((time.time()%1)*1000))
         age = 20
@@ -40,7 +50,7 @@ class signup(Resource):
         md.insertdb(sql)
         session['id'] = userid
         session['name'] = name
-        return redirect("http://www.muinfilm.shop/webserver/select")
+        return redirect("https://www.muinfilm.shop/webserver/select")
 
 
 @server.route('/select')
