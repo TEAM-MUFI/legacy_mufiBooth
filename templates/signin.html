@@ -68,7 +68,7 @@
                     url:'/v2/user/me',
                     success: res => {
                         const kakao_account = res.kakao_account;
-			window.location.href = 'http://www.muinfilm.shop/webserver/oauth/'+res.id+'/'+kakao_account.profile.nickname+'/'+kakao_account.age_range+'/'+kakao_account.gender+"/"+kakao_account.talk_message+"/"+authObj['access_token'];
+			window.location.href = 'http://www.muinfilm.shop/webserver/oauth/'+res.id+'/'+kakao_account.profile.nickname+'/'+kakao_account.age_range+'/'+kakao_account.gender+"/"+kakao_account.talk_message+"/"+authObj['access_token']+"/"+authObj['refresh_token'];
                     },
                     fail: error => {
                         console.log(error)

@@ -15,19 +15,24 @@ key = KeyLoad()
 server.secret_key = key.getSecretKey()
 
 
-@server.route('/oauth/<string:token>/<string:name>/<string:age>/<string:gender>/<string:messageid>/<string:accessToken>')
+@server.route('/oauth/<string:token>/<string:name>/<string:age>/<string:gender>/<string:messageid>/<string:accessToken>/<string:refreshToken>')
 class signup(Resource):
-    def get(self,token,name,age,gender,messageid, accessToken):
+    def get(self,token,name,age,gender,messageid, accessToken, refreshToken):
         md = MufiData()
         
         kakao = kakaoLogin.KakaoLogin()
         res = kakao.getToken(accessToken)
-        res = json.loads(res.text)
+        res = json.loads(res)
         
         if 'id' not in res:
-            return redirect("https://www.muinfilm.shop/main")
+            if res['code'] == -401:
+                accessToken = kakao.getRefreshToken(refreshToken)
+                res = kakao.getToken(accessToken)
+            else:
+                return res
+                
         if (str(res['id']) != token):
-            return redirect("https://www.muinfilm.shop/main")
+            return res
         
         userid =""
         data = md.selectdb("select * from user where token = '"+ token +"';")
@@ -49,6 +54,7 @@ class signup(Resource):
             return "error"
         md.insertdb(sql)
         session['id'] = userid
+        session['token'] = str(res['id'])
         session['name'] = name
         return redirect("https://www.muinfilm.shop/webserver/select")
 
@@ -168,6 +174,9 @@ class paySuccess(Resource):
         if 'orderName' not in session:
             return redirect("http://www.muinfilm.shop/web/signin")
         else:
+            #카카오톡 메세지 전송코드 준비중
+            #kakao = kakaoLogin.KakaoLogin()
+            #res = kakao.sendMessagePin(session['token'], pin)
             p1 = str(pin[0])
             p2 = str(pin[1])
             p3 = str(pin[2])

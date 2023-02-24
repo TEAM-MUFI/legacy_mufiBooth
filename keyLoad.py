@@ -5,7 +5,7 @@ class KeyLoad:
         with open("./secretKey.json", 'r') as file:
             data = json.load(file)
             self.__paymentKey = data["paymentkey"]
-            self.__kakaokey = data["kakaoKey"]
+            self.__kakaoRestAPIkey = data["kakaoRestAPIKey"]
             self.__secretKey = data["secretKey"]
             self.__awsAccessKey = data["AWS_ACCESS_KEY"]
             self.__awsSecretAccessKey = data["AWS_SECRET_ACCESS_KEY"]
@@ -17,8 +17,8 @@ class KeyLoad:
     def getSecretKey(self):
         return self.__secretKey
         
-    def getKakaoKey(self):
-        return self.__kakaoKey
+    def getKakaoRestAPIKey(self):
+        return self.__kakaoRestAPIkey
         
     def getAwsKey(self):
         return self.__awsAccessKey
