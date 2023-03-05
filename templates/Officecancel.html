@@ -75,6 +75,12 @@
 							res.forEach((data)=>{
 								const newRow = table.insertRow();
 								
+								if(data['success'] == 1){
+									newRow.style.color = '#FC1616'
+								}else{
+									newRow.style.color = '#00FF40'
+								}
+								
 								const num = newRow.insertCell(0);
 								const ordername = newRow.insertCell(1);
 								const orderid = newRow.insertCell(2);

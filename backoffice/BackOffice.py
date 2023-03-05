@@ -109,5 +109,5 @@ class search(Resource):
             return make_response(json.dumps({'isSuccess': 'False', 'message' : 'please don\'t try hacking'}, ensure_ascii=False))
                     
         md = MufiData()
-        res = md.selectdb("select o.ordername, o.orderid, o.pinnumber, u.name, o.state from orders as o join user as u on o.userid = u.userid where %s"%(columnName) + " like '%"+ data +"%'")
+        res = md.selectdb("select o.ordername, o.orderid, o.pinnumber, u.name, o.state, EXISTS (select * from picture where orderid = o.orderid) as success  from orders as o join user as u on o.userid = u.userid where %s"%(columnName) + " like '%"+ data +"%'")
         return make_response(json.dumps(res, ensure_ascii=False))
