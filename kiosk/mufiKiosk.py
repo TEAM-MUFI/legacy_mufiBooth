@@ -27,6 +27,15 @@ kiosk = Namespace('kiosk')
 class uploadPicture(Resource):
     def post(self,orderid,date,count):
         threadList = []
+        md = MufiData()
+        
+        sql ="""select * from picture where orderid = '%s'"""%orderid
+        res = md.selectdb(sql)
+        
+
+        if(len(res)!=0):
+            return make_response(json.dumps({'isSuccess':"이미 사용된번호 입니다."}, ensure_ascii=False))
+        
         for i in range(int(count)):
             f = request.files['image'+str(i)]
             t = threading.Thread(target =savePicture, args = (f, orderid, date, i))

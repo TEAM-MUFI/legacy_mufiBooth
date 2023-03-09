@@ -174,7 +174,7 @@ class paySuccess(Resource):
         if 'orderName' not in session:
             return redirect("http://www.muinfilm.shop/web/signin")
         else:
-            #카카오톡 메세지 전송코드 준비중
+            #카카오톡 메세지 전송코드 준비중 
             #kakao = kakaoLogin.KakaoLogin()
             #res = kakao.sendMessagePin(session['token'], pin)
             p1 = str(pin[0])
