@@ -74,5 +74,6 @@ class getKiosk(Resource):
         if(ordersCount==0):
             return make_response(json.dumps({'isSuccess' :"False"}))
         else:
+            ordername = ordername[:-1]
             return make_response(json.dumps({'isSuccess' : "True", 'orderName':ordername,'userId':userid,'orderId':orderid}, ensure_ascii=False))
         return make_response(json.dumps({"error":"server error"}))
