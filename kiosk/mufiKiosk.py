@@ -14,7 +14,7 @@ def savePicture(picture, orderid, date, count):
     pid = date+"_"+orderid+"_"+str(count)
     try:
         s3.uploadImage(picture, pid)
-        sql ="""insert into picture(pictureid, picturetitle, orderid) values('%s','%s','%s')"""%(pid,count,orderid)
+        sql ="""insert into photo(pictureid, picturetitle, orderid) values('%s','%s','%s')"""%(pid,count,orderid)
         md.insertdb(sql)
     except:
         return 'Not Save'
@@ -29,7 +29,7 @@ class uploadPicture(Resource):
         threadList = []
         md = MufiData()
         
-        sql ="""select * from picture where orderid = '%s'"""%orderid
+        sql ="""select * from photo where orderid = '%s'"""%orderid
         res = md.selectdb(sql)
         
 
@@ -65,7 +65,7 @@ class getKiosk(Resource):
         userid = res[0]['userid']
             
 
-        sql ="""select * from picture where orderid = '%s'"""%orderid
+        sql ="""select * from photo where orderid = '%s'"""%orderid
         res = md.selectdb(sql)
 
         if(len(res)!=0):

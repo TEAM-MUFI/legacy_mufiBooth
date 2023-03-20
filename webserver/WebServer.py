@@ -86,7 +86,7 @@ class photo(Resource):
             orderidlist = []
             pictureid = []
             md = MufiData()
-            sql = """select * from picture where orderid ='%s'"""%orderid
+            sql = """select * from photo where orderid ='%s'"""%orderid
             res = md.selectdb(sql)
             for j in res:
                 orderidlist.append(orderid)
@@ -110,7 +110,7 @@ class photo(Resource):
             for i in res:
                 orderid.append(i['orderid'])
             for i in orderid:
-                sql ="""select * from picture where orderid ='%s' and picturetitle = '0'"""%i
+                sql ="""select * from photo where orderid ='%s' and picturetitle = '0'"""%i
                 res = md.selectdb(sql)
                 for j in res:
                     orderidlist.append(j['orderid'])
@@ -220,7 +220,7 @@ class CouponList(Resource):
         if 'id' not in session:
             return redirect("http://www.muinfilm.shop/main")
         sql = """
-select o.orderid, o.ordername, o.pinnumber, if (p.pictureid is NULL, 1, pictureid) as used from orders as o left join picture as p on o.orderid=p.orderid where o.userid = '%s' and o.state = 1"""%session['id'] + """ group by o.orderid, o.ordername, o.pinnumber, p.pictureid having p.pictureid like '%\\_0' or p.pictureid is NULL;"""
+select o.orderid, o.ordername, o.pinnumber, if (p.pictureid is NULL, 1, pictureid) as used from orders as o left join photo as p on o.orderid=p.orderid where o.userid = '%s' and o.state = 1"""%session['id'] + """ group by o.orderid, o.ordername, o.pinnumber, p.pictureid having p.pictureid like '%\\_0' or p.pictureid is NULL;"""
 
         md = MufiData()
         res = md.selectdb(sql)
