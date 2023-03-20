@@ -137,8 +137,6 @@ class paySuccess(Resource):
         amount = request.args.get("amount")
         tp = tosspay.TossPay()
         md = MufiData()
-        res = tp.signIn(paykey, amount, orderId)
-        res = json.loads(res)
 
         if 'orderName' not in res:
             return redirect("http://www.muinfilm.shop/webserver/fail")
@@ -157,6 +155,9 @@ class paySuccess(Resource):
 
         sql = """insert into orders(orderid, ordername, pinnumber, userid) values('%s', '%s', '%s', '%s')"""%(orderId,res['orderName'],pin,session['id'])
         md.insertdb(sql)
+        
+        res = tp.signIn(paykey, amount, orderId)
+        res = json.loads(res)
 
         if "paymentKey" in res:
             sql ="""insert into pay(paymentkey, kind, userid, orderid, price) values('%s', '%s', '%s', '%s', %d)"""%(paykey,"toss",session['id'],orderId,int(amount))
