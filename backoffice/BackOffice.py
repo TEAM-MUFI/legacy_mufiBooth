@@ -31,7 +31,7 @@ class mainPage(Resource):
             return make_response(json.dumps({'isSuccess': 'False', 'message' : 'please don\'t try hacking'}, ensure_ascii=False))
             
         md = MufiData()
-        res = md.selectdb("select * from branchOffice where officeid = '"+request.form['username']+"' and officepw = '"+request.form['password']+"';")
+        res = md.selectdb("select * from busers where officeid = '"+request.form['username']+"' and officepw = '"+request.form['password']+"';")
         
         if(len(res)==0):
             return redirect("http://www.muinfilm.shop/back_office/")
