@@ -3,12 +3,13 @@ from flask_restx import Resource, Api, Namespace
 from webserver import kakaoLogin
 from webserver import tosspay
 from db import MufiData
-from datetime import timedelta
+from datetime import timedelta, datetime
 import time
-from datetime import datetime
 import json
 import random
 from keyLoad import KeyLoad
+import re
+
 
 server = Namespace('webserver')
 key = KeyLoad()
@@ -197,7 +198,6 @@ class admin(Resource):
     def get(self):
         return make_response(render_template('id.html'))
 
-
 @server.route('/id/server')
 class admin(Resource):
     def get(self):
@@ -214,6 +214,45 @@ class admin(Resource):
             session['name'] = "tester"
             return redirect("http://www.muinfilm.shop/webserver/menu")
 
+@server.route('/coupon/registration/<string:code>')
+class CouponList(Resource):
+    def get(self, code):
+        pattern = re.compile('[^a-zA-Z0-9]+')
+        if pattern.search(text):
+            return make_response(json.dumps({'isSuccess': 'False', 'message' : 'please don\'t try hacking'}, ensure_ascii=False))
+        if 'id' not in session:
+            return make_response(json.dumps({'isSuccess': 'False', 'message' : 'please don\'t try hacking'}, ensure_ascii=False))
+        md = MufiData()
+        sql = """select * from coupon where id = '%s'"""%(code)
+        res = md.selectdb(sql)
+        
+        orderName = res[0]['name']
+        business = res[0]['business_name']
+        
+        day =  "%04d%02d%02d" % (d.year, d.month, d.day)
+        d_time = "%02d%02d%02d%d" % (d.hour, d.minute, d.second, d.microsecond)
+        d_time = d_time[:8]
+        
+        orderId = day + business + d_time
+        
+        
+        pw = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        pw += "0123456789"
+
+        while(1):
+            random.seed(time.time())
+            pin = "".join(random.sample(pw, 5))
+            sql = """select * from orders where pinnumber='%s'"""%pin
+            tmpres = md.selectdb(sql)
+            if(len(tmpres)==0):
+                break
+                
+        sql = """insert into orders(orderid, ordername, pinnumber, userid) values('%s', '%s', '%s', '%s')"""%(orderId,res['orderName'],pin,session['id'])
+        md.insertdb(sql)
+        
+        sql = """update coupon set used = true where id = '%s'"""%(code)
+        md.insertdb(sql)
+        
 
 @server.route('/coupon/list')
 class CouponList(Resource):
