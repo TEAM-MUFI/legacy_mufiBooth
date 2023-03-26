@@ -71,7 +71,7 @@
 						{% if order['used'] == '1' %}
 							<canvas class="qr-wrap" id="{{order['pinnumber']}}"></canvas>
 						{% else %}
-							<img src="https://mufi-photo.s3.ap-northeast-2.amazonaws.com/kiosk-photo/{{order['used']}}.png">
+							<img loading="lazy" src="https://mufi-photo.s3.ap-northeast-2.amazonaws.com/kiosk-photo/{{order['used']}}.png">
 						{% endif %}
 					</div>
 				</div>
