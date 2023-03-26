@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/static/css/default/common.css">
     <link rel="stylesheet" href="/static/css/modal.css">
     <link rel="stylesheet" href="/static/css/buyList.css">
+    <link rel="stylesheet" href="/static/css/cameraQR.css">
 </head>
 <body>
     <header>
@@ -105,9 +106,15 @@
             </div>
         </div>
     </div>
+    <div id="camera-modal" class="modal-overlay">
+        <canvas hidden="" id="camera-canvas"></canvas>
+    </div>
+    <div id="toast"></div>
 </body>
 <script src="{{ url_for('static', filename='js/modal.js')}}"></script>
 <script src="{{ url_for('static', filename='js/qrious.js')}}"></script>
+<script src="{{ url_for('static', filename='/js/jsQR.js')}}"></script>
+<script src="{{ url_for('static', filename='/js/cameraQR.js')}}"></script>
 <script src="/static/js/modal.js"></script>
 <script src="/static/js/qrious.js"></script>
 <script>

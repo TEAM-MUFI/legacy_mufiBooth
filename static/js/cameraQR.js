@@ -6,11 +6,11 @@ const video = document.createElement("video");
 
     canvas.canvas.willReadFrequently = true;
 
-    const modal = document.getElementById("camera-modal")
+    const camera_modal = document.getElementById("camera-modal")
     const btnModal = document.getElementById("camera-btn-modal")
 
     btnModal.addEventListener("click", e => {
-        modal.style.display = "flex";
+        camera_modal.style.display = "flex";
 	window.scrollTo(0,0);
         navigator.mediaDevices
             .getUserMedia({ video: { facingMode: "environment" } })
@@ -26,9 +26,9 @@ const video = document.createElement("video");
         });
     })
 
-    modal.addEventListener("dblclick", e => {
+    camera_modal.addEventListener("dblclick", e => {
         const evTarget = e.target
-        modal.style.display = "none"
+        camera_modal.style.display = "none"
         scanning = false;
         canvasElement.hidden = true;
 	document.body.style.overflow = "unset";
