@@ -33,8 +33,8 @@
             <h1>포토 선택</h1>
         </div>
         <div>
-            <a href="/webserver/coupon/list">
-                <span class="material-symbols-outlined">
+            <a>
+                <span id="camera-btn-modal" class="material-symbols-outlined">
                     photo_camera
                 </span>
             </a>
@@ -47,7 +47,7 @@
 			{% if order['used'] == '1' %}
 			<div class="box-user-photo border-rounded clicker"
 			     id="C{{order['pinnumber']}}"
-			     onclick={clickItem("{{order['pinnumber']}}");}>
+			     onclick="visible()">
 			{% else %}
 			<div class="box-user-photo border-rounded"
 			     onclick="location.href='http://www.muinfilm.shop/webserver/subphoto/{{order['orderid']}}'">
@@ -105,7 +105,6 @@
             </div>
         </div>
     </div>
-    
 </body>
 <script src="{{ url_for('static', filename='js/modal.js')}}"></script>
 <script src="{{ url_for('static', filename='js/qrious.js')}}"></script>
@@ -120,11 +119,18 @@
         generateQR(pin, element);
     })
 
+    const box = document.querySelectorAll(".clicker");
+    box.forEach((element) => {
+        element.addEventListener("click", visible);
+        var uppin = element.getAttribute('id').substr(1);
+        console.log(uppin);
+        generateQR(uppin, element);
+    })
+
     function clickItem(code){
 	    const qrmodal = document.getElementById('qr-modal');
 	    generateQR(code, qrmodal);
 	    visible();
     }
-
 </script>
 </html>
