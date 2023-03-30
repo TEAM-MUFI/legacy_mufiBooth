@@ -23,9 +23,8 @@ let purchase = {
     totalPrice: 3000
 }
 
-function popOn(event) {
-    const itemName = event.target.parentNode.parentNode.querySelector(".menu-title > h4").innerText.substr(5);
-    const matched = menu.find(item => item.name === itemName);
+function popOn(item) {
+    const matched = menu.find(menu => menu === item);
     console.log(matched);
     orderPrice.innerText = matched.price.toLocaleString('ko-KR') + "원";
     purchase.name = matched.name;

@@ -8,46 +8,24 @@ menu.forEach((item) => {
 
 function addMenu(item) {
     const contentWrap = document.querySelector("#content");
-    // const content = document.createElement("div");
     const menu = document.createElement("div");
-    const menuImgDiv = document.createElement("div");
-    const menuImg = document.createElement("img");
-    const menuInfo = document.createElement("div");
-    const menuTitleDiv = document.createElement("div");
-    const menuTitle = document.createElement("h4");
-    const menuPriceDiv = document.createElement("div");
-    const menuPrice = document.createElement("h5");
-    
-    // content.classList.add("content");
-    menu.classList.add("menu")
-    menuImgDiv.classList.add("menu-img");
-    menuInfo.classList.add("menu-info");
-    menuTitleDiv.classList.add("menu-title");
-    menuPriceDiv.classList.add("menu-price");
 
+    menu.innerHTML = `
+        <div class="menu-img">
+            <img src="${pathLocal + item.img}">
+        </div>
+        <div class="menu-info">
+            <div class="menu-title">
+                <h4>[${item.size}컷] ${item.name}</h4>
+            </div>
+            <div class="menu-price">
+                <h5>1장 ${item.price.toLocaleString('ko-KR')}원</h5>
+            </div>
+        </div>
+    `;
 
-    menuImgDiv.onclick = popOn;
-    menuTitle.onclick = popOn;
-
-    menuImg.src = pathLocal + item.img;
-
-	if(item.size == 4){
-    		menuTitle.innerText = "[" + item.size + "컷] " + item.name;
-    		menuPrice.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
-	}
-	else{
-		menuTitle.innerText = "[" + item.size + "컷] " + item.name;
-                menuPrice.innerText = "1장 " + item.price.toLocaleString('ko-KR') + "원";
-	}
-    
-    // content.appendChild(menu);
-    menu.appendChild(menuImgDiv);
-    menu.appendChild(menuInfo);
-    menuImgDiv.appendChild(menuImg);
-    menuInfo.appendChild(menuTitleDiv);
-    menuInfo.appendChild(menuPriceDiv);
-    menuTitleDiv.appendChild(menuTitle);
-    menuPriceDiv.appendChild(menuPrice);
+    console.log(menu);
+    menu.addEventListener('click', () => popOn(item))
     
     contentWrap.appendChild(menu);
 
