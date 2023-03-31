@@ -14,7 +14,7 @@ let menu = [
         img: "6-white.png"
     },
     {
-        name: "상상유니브 서울 상상필름",
+        name: "상상유니브 서울 상상필름 운영",
         frame: "",
         size: 6,
         price: 800000,
