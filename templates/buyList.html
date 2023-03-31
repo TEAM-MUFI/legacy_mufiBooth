@@ -128,12 +128,13 @@
 
     const box = document.querySelectorAll(".clicker");
     box.forEach((element) => {
-        element.addEventListener("click", clickItem);
-        var uppin = element.getAttribute('id').substr(1);
-        generateQR(uppin, element);
+	var uppin = element.getAttribute('id').substr(1);
+	element.addEventListener("click", ()=>clickItem(uppin));
     })
 
-    function clickItem(){
+    function clickItem(code){
+	    const qrmodal = document.getElementById('qr-modal');
+	    generateQR(code, qrmodal);
 	    visible();
 	    toast("카메라에 QR을\n인식 해주세요", "message", 1500);
     }

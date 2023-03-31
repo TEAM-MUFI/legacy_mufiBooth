@@ -2,6 +2,7 @@ const video = document.createElement("video");
     const canvasElement = document.getElementById("camera-canvas");
     const canvas = canvasElement.getContext("2d");
     let scanning = false;
+    let scanning_state =true
     const qrcode = window.qrcode;
 
     canvas.canvas.willReadFrequently = true;
@@ -38,14 +39,17 @@ const video = document.createElement("video");
     })
 
     function send_QRdata(res){
+	scanning_state = false;
         const values = res.split("/")
         
 	if(values.length != 4){
 	    toast("다른 qr을 인색해주세요.", 'err', 1000);
+	    scanning_state = true;
             return;
         }
         if(values[3]!="mufi"){
 	    toast("다른 qr을 인색해주세요.", 'err', 1000);
+	    scanning_state = true;
             return;
         }
 
@@ -64,28 +68,33 @@ const video = document.createElement("video");
 	xhr.onload = () => {
 		if (xhr.status != 200) {
 			toast("다시 시도해 주세요.", 'err', 1000);
+			scanning_state = true;
 			return;
 		}
 		var res = JSON.parse(xhr.response);
 		if(!('isSuccess' in res)){
 			toast("실패했습니다.", 'err', 1000);
+			scanning_state = true;
 			return;
 		}
 
 		if('True' == res['isSuccess']){
+			scanning_state = true;
 			location.replace("https://www.muinfilm.shop/webserver/success/"+res['pin_number']);
-			return;
 		}
 		else{
 			if(res['message'] == 'used code'){
 				toast("이미 사용한 코드입니다.", 'err', 1000);
+				scanning_state = true;
 			}
 			else if(res['message'] == 'wait'){
 				toast("쿠폰 등록중...", 'comment', 1000);
+				scanning_state = true;
 			}
 			else{
 				console.log(res)
 				toast("다시 시도해 주세요.", 'err', 1000);
+				scanning_state = true;
 			}
 		}
 	}
@@ -102,7 +111,7 @@ const video = document.createElement("video");
             var code = jsQR(imageData.data, imageData.width, imageData.height, {
                 inversionAttempts : "dontInvert",
             });
-            if(code) {
+            if(code && scanning_state) {
                 send_QRdata(code.data);
             }
         }, 100);

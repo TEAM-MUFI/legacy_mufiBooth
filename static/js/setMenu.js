@@ -34,12 +34,3 @@ function addMenu(item) {
 
 const btnProduct = document.querySelectorAll(".btn-Product");
 btnProduct.forEach((target) => target.addEventListener("click", popOn));
-
-
-
-
-
-
-
-console.log(btnProduct)
-
