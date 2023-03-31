@@ -80,6 +80,9 @@ const video = document.createElement("video");
 			if(res['message'] == 'used code'){
 				toast("이미 사용한 코드입니다.", 'err', 1000);
 			}
+			else if(res['message'] == 'wait'){
+				toast("쿠폰 등록중...", 'comment', 1000);
+			}
 			else{
 				console.log(res)
 				toast("다시 시도해 주세요.", 'err', 1000);

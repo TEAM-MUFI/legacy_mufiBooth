@@ -138,14 +138,17 @@ class paySuccess(Resource):
         amount = request.args.get("amount")
         tp = tosspay.TossPay()
         md = MufiData()
-
+        
+        res = tp.signIn(paykey, amount, orderId)
+        res = json.loads(res)
+        
         if 'orderName' not in res:
             return redirect("http://www.muinfilm.shop/webserver/fail")
 
         pw = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         pw += "0123456789"
         pin=""
-
+        
         while(1):
             random.seed(time.time())
             pin = "".join(random.sample(pw, 5))
@@ -156,9 +159,6 @@ class paySuccess(Resource):
 
         sql = """insert into orders(orderid, ordername, pinnumber, userid) values('%s', '%s', '%s', '%s')"""%(orderId,res['orderName'],pin,session['id'])
         md.insertdb(sql)
-        
-        res = tp.signIn(paykey, amount, orderId)
-        res = json.loads(res)
 
         if "paymentKey" in res:
             sql ="""insert into pay(paymentkey, kind, userid, orderid, price) values('%s', '%s', '%s', '%s', %d)"""%(paykey,"toss",session['id'],orderId,int(amount))
@@ -231,6 +231,15 @@ class CouponList(Resource):
         
         if(len(res)==0):
             return make_response(json.dumps({'isSuccess': 'False', 'message' : 'worng code'}, ensure_ascii=False))
+            
+        if( int(request.form['count']) != res[0]['count'] or request.form['b_name'] != res[0]['business_name']):
+            return make_response(json.dumps({'isSuccess': 'False', 'message' : 'uncorrect'}, ensure_ascii=False))
+        
+        if 'coupon_code' in session:
+            if(session['coupon_code'] == code):
+                return make_response(json.dumps({'isSuccess': 'False', 'message' : 'wait'}, ensure_ascii=False))
+        
+        session['coupon_code'] = code
         
         if(res[0]['used'] == True):
             return make_response(json.dumps({'isSuccess': 'False', 'message' : 'used code'}, ensure_ascii=False))
@@ -239,16 +248,12 @@ class CouponList(Resource):
         bName = request.form['b_name']
         orderName = res[0]['name']
         
-        if( int(count) != res[0]['count'] or bName != res[0]['business_name']):
-            return make_response(json.dumps({'isSuccess': 'False', 'message' : 'uncorrect'}, ensure_ascii=False))
-        
         d = datetime.now()
         day =  "%04d%02d%02d" % (d.year, d.month, d.day)
         dTime = "%02d%02d%02d%d" % (d.hour, d.minute, d.second, d.microsecond)
         dTime = dTime[:8]
         
         orderId = day + bName + dTime
-        
         
         pw = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         pw += "0123456789"
@@ -261,13 +266,14 @@ class CouponList(Resource):
             if(len(tmpres)==0):
                 break
                 
+        sql = """update coupon set used = true where id = '%s'"""%(code)
+        md.insertdb(sql)
+                
         sql = """insert into orders(orderid, ordername, pinnumber, userid) values('%s', '%s', '%s', '%s')"""%(orderId,orderName,pin,session['id'])
         md.insertdb(sql)
         
-        sql = """update coupon set used = true where id = '%s'"""%(code)
-        md.insertdb(sql)
-        
         session['orderName'] = orderName
+        session['coupon_code'] = "end"
         
         return make_response(json.dumps({'isSuccess': 'True', 'message': 'coupon registration success', 'pin_number' : pin}, ensure_ascii=False))
         

@@ -21,7 +21,7 @@ app.config['JSON_AS_ASCII'] = False
 key = KeyLoad()
 app.secret_key = key.getSecretKey()
 
-app.config["PERMANENT_SESSION_LIFETIME"]=timedelta(minutes=10)  #세션 시간 10분 설정
+app.config["PERMANENT_SESSION_LIFETIME"]=timedelta(minutes=20)  #세션 시간 10분 설정
 #cors = CORS(app, resources={ r'/kiosk/*': {'origins': '*'}, r'/back_office/*': {'origins': '*'} }) # /kiosk에 접속 cors 허용
 
 api = Api(app, version='1.0', title='API 문서', description='Swagger 문서', doc="/api-docs", terms_url="/api-docs")
