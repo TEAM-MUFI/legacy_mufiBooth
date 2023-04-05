@@ -235,14 +235,14 @@ class CouponList(Resource):
         if( int(request.form['count']) != res[0]['count'] or request.form['b_name'] != res[0]['business_name']):
             return make_response(json.dumps({'isSuccess': 'False', 'message' : 'uncorrect'}, ensure_ascii=False))
         
+        if(res[0]['used'] == True):
+            return make_response(json.dumps({'isSuccess': 'False', 'message' : 'used code'}, ensure_ascii=False))
+
         if 'coupon_code' in session:
             if(session['coupon_code'] == code):
                 return make_response(json.dumps({'isSuccess': 'False', 'message' : 'wait'}, ensure_ascii=False))
-        
+
         session['coupon_code'] = code
-        
-        if(res[0]['used'] == True):
-            return make_response(json.dumps({'isSuccess': 'False', 'message' : 'used code'}, ensure_ascii=False))
         
         count = request.form['count']
         bName = request.form['b_name']
