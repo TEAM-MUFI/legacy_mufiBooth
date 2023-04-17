@@ -2,8 +2,11 @@ const video = document.createElement("video");
     const canvasElement = document.getElementById("camera-canvas");
     const canvas = canvasElement.getContext("2d");
     let scanning = false;
-    let scanning_state =true
+    let scanning_state =true;
     const qrcode = window.qrcode;
+
+    let lastTapTime = 0;
+    let tapDelay = 250;
 
     canvas.canvas.willReadFrequently = true;
 
@@ -27,16 +30,26 @@ const video = document.createElement("video");
         });
     })
 
-    camera_modal.addEventListener("dblclick", e => {
-        const evTarget = e.target
+    camera_modal.ontouchstart = handleTap;
+    camera_modal.ondblclick = cameraModalClose;
+
+    function handleTap(e) {
+        let now = new Date().getTime();
+        if (now - lastTapTime <= tapDelay) {
+                cameraModalClose(e);
+        }
+        lastTapTime = now;
+    }
+
+    function cameraModalClose(e){
         camera_modal.style.display = "none"
         scanning = false;
         canvasElement.hidden = true;
-	document.body.style.overflow = "unset";
+        document.body.style.overflow = "unset";
         video.srcObject.getTracks().forEach(track => {
-		track.stop();
+                track.stop();
         });
-    })
+    }
 
     function send_QRdata(res){
 	scanning_state = false;
