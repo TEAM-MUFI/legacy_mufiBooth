@@ -13,13 +13,13 @@ let menu = [
         price: 4000,
         img: "6-white.png"
     },
-    {
-        name: "상상유니브 서울 상상필름 운영",
-        frame: "",
-        size: 8,
-        price: 800000,
-        img: "Seowon-4.png"
-    },
+    //{
+    //    name: "상상유니브 서울 상상필름 운영",
+    //    frame: "",
+    //    size: 8,
+    //    price: 800000,
+    //    img: "Seowon-4.png"
+    //},
     // {
     //     name: "아늑하고 우아한 사진",
     //     frame: "충북대학교",
