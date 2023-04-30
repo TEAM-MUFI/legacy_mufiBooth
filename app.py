@@ -36,11 +36,7 @@ def page_not_found(error):
     return "Error", 404
 
 @app.route('/')
-def test():
-    return make_response(render_template('signin.html'))
-
-@app.route('/main')
-def home():
+def main():
     return make_response(render_template('signin.html'))
 
 api = Api(app, version='1.0', title='API 문서', description='Swagger 문서', doc="/api-docs", terms_url="/api-docs")
