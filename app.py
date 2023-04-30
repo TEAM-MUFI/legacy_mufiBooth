@@ -5,6 +5,7 @@ from kiosk.mufiKiosk import kiosk
 from web.mufiWeb import web
 from webserver.WebServer import server
 from backoffice.BackOffice import boserver
+from sockets.SocketApp import socketioApp, socketio
 from markupsafe import escape
 from datetime import timedelta
 from flask_cors import CORS, cross_origin
@@ -21,10 +22,14 @@ app.config['JSON_AS_ASCII'] = False
 key = KeyLoad()
 app.secret_key = key.getSecretKey()
 
-app.config["PERMANENT_SESSION_LIFETIME"]=timedelta(minutes=20)  #세션 시간 10분 설정
-#cors = CORS(app, resources={ r'/kiosk/*': {'origins': '*'}, r'/back_office/*': {'origins': '*'} }) # /kiosk에 접속 cors 허용
 
-api = Api(app, version='1.0', title='API 문서', description='Swagger 문서', doc="/api-docs", terms_url="/api-docs")
+app.config["PERMANENT_SESSION_LIFETIME"]=timedelta(minutes=20)  #세션 시간 10분 설정
+
+CORS(app)
+
+app.register_blueprint(socketioApp, url_prefix='/socketio')
+socketio.init_app(app, async_mode="eventlet", cors_allowed_origins="*",
+                        logger=True, engineio_logger=True)
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -32,11 +37,13 @@ def page_not_found(error):
 
 @app.route('/')
 def test():
-    return 'hello world'
+    return make_response(render_template('signin.html'))
 
 @app.route('/main')
 def home():
     return make_response(render_template('signin.html'))
+
+api = Api(app, version='1.0', title='API 문서', description='Swagger 문서', doc="/api-docs", terms_url="/api-docs")
 
 api.add_namespace(kiosk,'/kiosk')
 
