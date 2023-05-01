@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask_socketio import SocketIO, join_room, leave_room, close_room, emit
 import jwt
-from jwt.exveptions import ExpiredSignatureError
+from jwt.exceptions import ExpiredSignatureError
 import time
 
 from keyLoad import KeyLoad
@@ -39,7 +39,7 @@ def on_join_room(kiosk_id):
     }
     encodingData = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
-    emit('join_room'+kiosk_id, {'jwt': encodingData}, room=data)
+    emit('join_room'+kiosk_id, {'isSuccess' : 'true', 'jwt': encodingData}, room=data)
 
 @socketio.on('leave_room')
 def on_leave_room(data):
