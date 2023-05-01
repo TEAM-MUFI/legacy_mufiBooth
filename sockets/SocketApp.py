@@ -1,18 +1,45 @@
 from flask import Blueprint
 from flask_socketio import SocketIO, join_room, leave_room, close_room, emit
+import jwt
+from jwt.exveptions import ExpiredSignatureError
+import time
+
+from keyLoad import KeyLoad
+from db import MufiData
+
+key = KeyLoad()
+
+SECRET_KEY  = key.getSecretKey()
 
 socketioApp = Blueprint('socketioApp', __name__)
 socketio = SocketIO()
+
 
 # Socket.IO event handlers
 @socketio.on('connect')
 def on_connect():
     print('Client connected')
 
-@socketio.on('join_room')
-def on_join_room(data):
-    join_room(data)
-    emit('send_jwt', {'jwt': "sa3EW4rfw4GdVDres63e3bsdG5"}, room=data)
+@socketio.on('kiosk_join_room')
+def on_join_room(kiosk_id):
+
+    md = MufiData()
+
+    data = md.selectdb("select * from kiosk where id = '%s';" % kiosk_id)
+
+    if(len(data) == 0):
+        emit('join_room'+kiosk_id, {'isSuccess' : 'fail', 
+                            'reason' : 'invalid'
+                            })
+    join_room(kiosk_id)
+
+    payload = {
+        "kiosk_id" : kiosk_id,
+        "exp" : int(time.time())+60
+    }
+    encodingData = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+
+    emit('join_room'+kiosk_id, {'jwt': encodingData}, room=data)
 
 @socketio.on('leave_room')
 def on_leave_room(data):
