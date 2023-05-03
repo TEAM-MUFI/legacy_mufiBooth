@@ -25,7 +25,7 @@ app.secret_key = key.getSecretKey()
 
 app.config["PERMANENT_SESSION_LIFETIME"]=timedelta(minutes=20)  #세션 시간 10분 설정
 
-CORS(app)
+#CORS(app)
 
 app.register_blueprint(socketioApp, url_prefix='/socketio')
 socketio.init_app(app, async_mode="eventlet", cors_allowed_origins="*",

@@ -1,6 +1,6 @@
 let menu = [
     {
-            name: "가장 많이 찾는 사진",
+            name: "4컷",
             frame: "",
             size: 4,
             price: 3000,
