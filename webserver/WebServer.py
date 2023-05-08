@@ -66,7 +66,7 @@ class menu(Resource):
         if 'id' in session:
             return make_response(render_template('select.html'))
         else:
-            return redirect("http://www.muinfilm.shop/web/signin")
+            return redirect("http://www.muinfilm.shop/")
 
 
 @server.route('/menu')
@@ -75,9 +75,9 @@ class menu(Resource):
         if 'id' in session:
             if 'name' in session:
                 return make_response(render_template('menu.html',name=session['name']))
-            return redirect("http://www.muinfilm.shop/web/signin")
+            return redirect("http://www.muinfilm.shop/")
         else:
-            return redirect("http://www.muinfilm.shop/web/signin")
+            return redirect("http://www.muinfilm.shop/")
 
 
 @server.route('/subphoto/<string:orderid>')
@@ -95,7 +95,7 @@ class photo(Resource):
             pictureid.sort()
             return make_response(render_template('photo.html',photo=pictureid, order = orderidlist, subcheck=0, count=len(pictureid)))
         else:
-            return redirect("http://www.muinfilm.shop/web/signin")
+            return redirect("http://www.muinfilm.shop/")
 
 
 @server.route('/photo/main')
@@ -118,7 +118,7 @@ class photo(Resource):
                     pictureid.append(j['pictureid'])
             return make_response(render_template('photo.html', photo = pictureid, order = orderidlist, subcheck=1,count =len(pictureid) ))
         else:
-            return redirect("http://www.muinfilm.shop/main")
+            return redirect("http://www.muinfilm.shop/")
         return {"message":"errorMessage"}
 
 
@@ -132,7 +132,7 @@ class payFail(Resource):
 class paySuccess(Resource):
     def get(self):
         if 'id' not in session:
-            return redirect("http://www.muinfilm.shop/web/signin")
+            return redirect("http://www.muinfilm.shop/")
         paykey = request.args.get("paymentKey")
         orderId = request.args.get("orderId")
         amount = request.args.get("amount")
@@ -223,7 +223,7 @@ class CouponList(Resource):
             return make_response(json.dumps({'isSuccess': 'False', 'message' : 'please don\'t try hacking'}, ensure_ascii=False))
         
         if 'id' not in session:
-            return redirect("http://www.muinfilm.shop/main")
+            return redirect("http://www.muinfilm.shop/")
         
         md = MufiData()
         sql = """select * from coupon where id = '%s'"""%(code)
@@ -282,7 +282,7 @@ class CouponList(Resource):
 class CouponList(Resource):
     def get(self):
         if 'id' not in session:
-            return redirect("http://www.muinfilm.shop/main")
+            return redirect("http://www.muinfilm.shop/")
         sql = """
 select o.orderid, o.ordername, o.pinnumber, if (p.pictureid is NULL, 1, pictureid) as used from orders as o left join photo as p on o.orderid=p.orderid where o.userid = '%s' and o.state = 1"""%session['id'] + """ group by o.orderid, o.ordername, o.pinnumber, p.pictureid having p.pictureid like '%\\_0' or p.pictureid is NULL;"""
 
