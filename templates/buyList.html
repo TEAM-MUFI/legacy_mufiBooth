@@ -47,8 +47,7 @@
 	        {% for order in orderList %}
 			{% if order['used'] == '1' %}
 			<div class="box-user-photo border-rounded clicker"
-			     id="C{{order['pinnumber']}}"
-			     onclick="visible()">
+			     id="C{{order['pinnumber']}}">
 			{% else %}
 			<div class="box-user-photo border-rounded"
 			     onclick="location.href='http://www.muinfilm.shop/webserver/subphoto/{{order['orderid']}}'">
@@ -91,14 +90,6 @@
     <div class="modal hidden">
         <div class="modal-bg"></div>
         <div class="modal-main border-rounded">
-            <!-- <div id="modal-header">
-                <span id="modal-title">
-                    QR코드
-                </span>
-                <span id="modal-btn-close">
-                    <img src="/static/img/m-1/ico-cancle.png">
-                </span>
-            </div> -->
             <div class="modal-body">
                 <div class="qr-box-large border-rounded">
                     <canvas class="qr-wrap" id="qr-modal"></canvas>
@@ -111,6 +102,7 @@
     </div>
     <div id="toast"></div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js"></script>
 <script src="{{ url_for('static', filename='js/modal.js')}}"></script>
 <script src="{{ url_for('static', filename='js/qrious.js')}}"></script>
 <script src="{{ url_for('static', filename='/js/jsQR.js')}}"></script>
@@ -118,19 +110,86 @@
 <script src="/static/js/modal.js"></script>
 <script src="/static/js/qrious.js"></script>
 <script>
-
+    var NOWPIN = "";
     const qrWrapArray = document.querySelectorAll(".qr-wrap");
     qrWrapArray.forEach((element) => {
 	var pinNumber = element.getAttribute('id');
 	const pin = pinNumber.toString();
         generateQR(pin, element);
+	//showCamera(pin)
     })
+
+    var socket = io.connect('https://www.muinfilm.shop', {
+                          path: '/socket.io',
+		    transports: ['websocket']
+    })
+    socket.on("connect", ()=>{
+	console.log(socket.id);
+    });
+
+    socket.on("user_state", function (data) {
+                console.log(data);
+                if(data['isSuccess']=="Fail"){
+                        scanning_state = true;
+                        toast("인증 실패\n 다시 시도 해주세요.", 'message', 2000);
+                }else{
+                        toast("인증 성공", 'message', 3000);
+                        cameraModalClose("");
+			scanning_state = true;
+                }
+            });
 
     const box = document.querySelectorAll(".clicker");
     box.forEach((element) => {
 	var uppin = element.getAttribute('id').substr(1);
-	element.addEventListener("click", ()=>clickItem(uppin));
+	//element.addEventListener("click", ()=>clickItem(uppin));
+	element.addEventListener("click", ()=>showCamera(uppin));
     })
+    function showCamera(pinCode){
+	camera_modal.style.display = "flex";
+	window.scrollTo(0,0);
+	navigator.mediaDevices
+            .getUserMedia({ video: { facingMode: "environment" } })
+            .then(function(stream) {
+            scanning = true;
+            canvasElement.hidden = false;
+            video.setAttribute("playsinline", true);
+            video.srcObject = stream;
+	    document.body.style.overflow = "hidden";
+            video.play();
+	    NOWPIN = pinCode;
+            showCameraReader(pinCode);
+	    toast("화면을 두번 터치 하시면\n카메라가 종료됩니다.", 'message', 2500);
+        });
+    }
+
+    function showCameraReader(pinCode){
+	canvasElement.height = video.videoHeight;
+        canvasElement.width = video.videoWidth;
+        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+
+	setTimeout(() => {
+            var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+            var code = jsQR(imageData.data, imageData.width, imageData.height, {
+                inversionAttempts : "dontInvert",
+            });
+            if(code && scanning_state) {
+                sendJWT(code.data, NOWPIN);
+            }
+        }, 100);
+
+        scanning && requestAnimationFrame(showCameraReader);
+    }
+
+    function sendJWT(res, pin){
+	scanning_state = false;
+	let send_item = new Object();
+	send_item.jwt = res;
+	send_item.pin = pin;
+	send_item.user_id = '{{ user_id }}';
+	socket.emit("user_send_jwt", send_item);
+	console.log(res)
+    }
 
     function clickItem(code){
 	    const qrmodal = document.getElementById('qr-modal');
