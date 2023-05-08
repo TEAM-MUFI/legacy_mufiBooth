@@ -12,6 +12,7 @@ from flask_cors import CORS, cross_origin
 import sys
 from flask import send_file
 from keyLoad import KeyLoad
+import eventlet
 
 sys.setrecursionlimit(10**7)
 
@@ -28,8 +29,13 @@ app.config["PERMANENT_SESSION_LIFETIME"]=timedelta(minutes=20)  #세션 시간 1
 #CORS(app)
 
 app.register_blueprint(socketioApp, url_prefix='/socketio')
-socketio.init_app(app, async_mode="eventlet", cors_allowed_origins="*",
-                        logger=True, engineio_logger=True)
+socketio.init_app(app, 
+            cors_allowed_origins="*", 
+            async_mode='eventlet',
+            message_queue='redis://127.0.0.1:6379/0',
+            logger=True, 
+            engineio_logger=True
+        )
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -51,4 +57,6 @@ api.add_namespace(boserver,'/back_office')
 
 
 if __name__ =='__main__':
-    app.run(debug=False,host='locahost', port=3000, threaded=True)
+    eventlet.monkey_patch()
+
+    app.run(debug=False,host='locahost', port=3000)

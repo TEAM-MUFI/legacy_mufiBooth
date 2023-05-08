@@ -289,4 +289,4 @@ select o.orderid, o.ordername, o.pinnumber, if (p.pictureid is NULL, 1, picturei
         md = MufiData()
         res = md.selectdb(sql)
 
-        return make_response(render_template('buyList.html', orderList = res))
+        return make_response(render_template('buyList.html', orderList = res, user_id = session['id']))
