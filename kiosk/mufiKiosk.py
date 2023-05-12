@@ -23,9 +23,9 @@ def savePicture(picture, orderid, date, count):
 
 kiosk = Namespace('kiosk')
 
-@kiosk.route('/pictures/upload/<string:orderid>/<string:date>/<string:count>')
+@kiosk.route('/pictures/upload/<string:orderid>/<string:date>/<string:count>/<string:kiosk_id>')
 class uploadPicture(Resource):
-    def post(self,orderid,date,count):
+    def post(self,orderid,date,count, kiosk_id):
         threadList = []
         md = MufiData()
         
@@ -43,6 +43,10 @@ class uploadPicture(Resource):
             threadList.append(t)
         for t in threadList:
             a = t.join()
+
+        sql = "update orders set enroll_kiosk_id = '%s' where orderid = '%s';"%(kiosk_id, orderid)
+
+        res = md.insertdb(sql)
             
         return make_response(json.dumps({"message": "success Upload"}))
 
