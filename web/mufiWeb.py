@@ -1,6 +1,7 @@
 from flask import request, render_template, send_file, make_response, send_from_directory, redirect, url_for
 from flask_restx import Resource, Api, Namespace
 from werkzeug.serving import WSGIRequestHandler
+from aws import MufiS3
 
 web = Namespace('web')
 
@@ -20,13 +21,9 @@ class webRender(Resource):
         return make_response(render_template('signin.html'))
 
 
-@web.route('/picture/<string:name>')
+@web.route('/photo/<string:name>')
 class picture(Resource):
     def get(self,name):
-        return send_file("./picture/"+name)
-
-
-@web.route('/subphoto/<string:name>')
-class subphoto(Resource):
-    def get(self,name):
-        return send_file("picture/"+name)
+        s3 = MufiS3()
+        image = s3.getObjectImage(anme)
+        return send_file(image, mimetype='image/png')

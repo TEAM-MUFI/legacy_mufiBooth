@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import boto3
 from keyLoad import KeyLoad
+import io
 
 class MufiS3:
     def __init__(self):
@@ -22,3 +23,12 @@ class MufiS3:
         self.__s3.Object(bucket, key).put(Body=file)
         
         return 1
+
+    def getObjectImage(self, imageName):
+        bucket = 'mufi-photo'
+        key = 'kiosk-photo/'+imageName+'.png'
+        
+        s3_object = s3.Object(bucket, key)
+        image_bytes = s3_object.get()['Body'].read()
+        
+        return io.BytesIO(image_bytes)
