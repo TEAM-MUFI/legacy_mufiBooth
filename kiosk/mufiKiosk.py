@@ -25,11 +25,11 @@ kiosk = Namespace('kiosk')
 
 @kiosk.route('/pictures/upload/<string:orderid>/<string:date>/<string:count>/<string:kiosk_id>')
 class uploadPicture(Resource):
-    def post(self,orderid,date,count, kiosk_id):
+    def post(self, orderid, date, count, kiosk_id):
         threadList = []
         md = MufiData()
         
-        sql ="""select * from photo where orderid = '%s'"""%orderid
+        sql ="""select * from photo where orderid = '%s';"""%orderid
         res = md.selectdb(sql)
         
 

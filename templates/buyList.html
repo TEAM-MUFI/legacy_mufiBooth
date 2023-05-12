@@ -119,25 +119,7 @@
 	//showCamera(pin)
     })
 
-    var socket = io.connect('https://www.muinfilm.shop', {
-                          path: '/socket.io',
-		    transports: ['websocket']
-    })
-    socket.on("connect", ()=>{
-	console.log(socket.id);
-    });
-
-    socket.on("user_state", function (data) {
-                console.log(data);
-                if(data['isSuccess']=="Fail"){
-                        scanning_state = true;
-                        toast("인증 실패\n 다시 시도 해주세요.", 'message', 2000);
-                }else{
-                        toast("인증 성공", 'message', 3000);
-                        cameraModalClose("");
-			scanning_state = true;
-                }
-            });
+    var socket;
 
     const box = document.querySelectorAll(".clicker");
     box.forEach((element) => {
@@ -147,6 +129,24 @@
     })
     function showCamera(pinCode){
 	camera_modal.style.display = "flex";
+	socket = io.connect('https://www.muinfilm.shop', {
+                          path: '/socket.io',
+                    transports: ['websocket']
+    		})
+    	socket.on("connect", ()=>{
+        	console.log(socket.id);
+    		});
+
+    	socket.on("user_"+pinCode+"_state", function (data) {
+                if(data['isSuccess']=="Fail"){
+                        scanning_state = true;
+                        toast("인증 실패\n 다시 시도 해주세요.", 'err', 2000);
+                }else{
+                        toast("인증 성공", 'message', 3000);
+                        cameraModalClose("");
+                        scanning_state = true;
+                }
+            });
 	window.scrollTo(0,0);
 	navigator.mediaDevices
             .getUserMedia({ video: { facingMode: "environment" } })
@@ -159,7 +159,9 @@
             video.play();
 	    NOWPIN = pinCode;
             showCameraReader(pinCode);
+	    setTimeout(()=>{
 	    toast("화면을 두번 터치 하시면\n카메라가 종료됩니다.", 'message', 2500);
+	    }, 1000);
         });
     }
 
@@ -188,14 +190,13 @@
 	send_item.pin = pin;
 	send_item.user_id = '{{ user_id }}';
 	socket.emit("user_send_jwt", send_item);
-	console.log(res)
     }
 
     function clickItem(code){
 	    const qrmodal = document.getElementById('qr-modal');
 	    generateQR(code, qrmodal);
 	    visible();
-	    toast("카메라에 QR을\n인식 해주세요", "message", 1500);
+	    toast("카메라에 QR을\n인식 해주세요", "message", 1000);
     }
 </script>
 </html>

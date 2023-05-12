@@ -104,8 +104,8 @@ def on_room_message(data):
         emit("user_"+pin+"_state", {'isSuccess':'Fail', "message": "already used"})
         return
 
+    emit("user_"+pin+"_state", {'isSuccess':'Success', "message": "thank you"})
     emit('user_data', {'pin' : pin, 'orderId': orderid, 'orderName': ordername, 'userId': user_id}, room=sid)
-    emit("user_state", {'isSuccess':'Success', "message": "thank you", 'kiosk_id':rooms}, room=kiosk_id)
 
     leave_room(kiosk_id)
 
