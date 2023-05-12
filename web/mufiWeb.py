@@ -25,5 +25,5 @@ class webRender(Resource):
 class picture(Resource):
     def get(self,name):
         s3 = MufiS3()
-        image = s3.getObjectImage(anme)
-        return send_file(image, mimetype='image/png')
+        byteImage = s3.getObjectImage(name)
+        return send_file(byteImage, mimetype='image/png')

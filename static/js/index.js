@@ -43,7 +43,7 @@ function convertURLtoFile(url) {
 var $images = document.querySelectorAll('#img-export img')
 var promises = []
 for (var $image of $images) {
-  promises.push(convertURLtoFile($image.src))
+  promises.push(convertURLtoFile("https://www.muinfilm.shop/web/photo/"+$images[0].src.split("/")[4]))
 }
 
 var files = []

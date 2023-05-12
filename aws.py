@@ -26,9 +26,8 @@ class MufiS3:
 
     def getObjectImage(self, imageName):
         bucket = 'mufi-photo'
-        key = 'kiosk-photo/'+imageName+'.png'
+        key = 'kiosk-photo/'+imageName
         
-        s3_object = s3.Object(bucket, key)
-        image_bytes = s3_object.get()['Body'].read()
-        
-        return io.BytesIO(image_bytes)
+        s3Object = self.__s3.Object(bucket, key)
+        image = s3Object.get()['Body']
+        return image
