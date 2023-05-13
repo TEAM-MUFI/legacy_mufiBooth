@@ -2,6 +2,7 @@ from flask import request, render_template, send_file, make_response, send_from_
 from flask_restx import Resource, Api, Namespace
 from werkzeug.serving import WSGIRequestHandler
 from aws import MufiS3
+from io import BytesIO
 
 web = Namespace('web')
 
@@ -26,4 +27,6 @@ class picture(Resource):
     def get(self,name):
         s3 = MufiS3()
         byteImage = s3.getObjectImage(name)
-        return send_file(byteImage, mimetype='image/png')
+        return send_file(BytesIO(byteImage),
+                download_name='main.png',
+                mimetype='image/png')

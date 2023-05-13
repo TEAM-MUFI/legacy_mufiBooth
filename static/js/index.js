@@ -12,13 +12,14 @@ document.documentElement.addEventListener('touchend', function (event) {
          event.preventDefault(); 
        } lastTouchEnd = now; 
    }, false);
+
 var $shareButton = document.getElementById('share-button')
 $shareButton.disabled = true
 $shareButton.addEventListener('click', function() {
-  if (navigator.share && navigator.canShare({ files })) {
+  if (navigator.share && navigator.canShare({ files: [file] })) {
     navigator.share({
       title: '무피(MUFI)',
-      files
+      files: [file]
     }).then(() => {
       console.log('Thanks for sharing!');
     })
@@ -30,24 +31,19 @@ $shareButton.addEventListener('click', function() {
 
 // 이미지 URL => File Object
 function convertURLtoFile(url) {
-  fetch(url).then(function (response) {
+  return fetch(url).then(function (response) {
     return response.blob()
   }).then(function (data) {
-    var ext = url.split(".").pop(); // url 구조에 맞게 수정할 것
-    var filename = url.split("/").pop(); // url 구조에 맞게 수정할 것
-    var metadata = { type: `image/${ext}` };
+    var filename = url.split("/").pop();
+    var metadata = { type: data.type };
     return new File([data], filename, metadata);
   })
 };
 
-var $images = document.querySelectorAll('#img-export img')
-var promises = []
-for (var $image of $images) {
-  promises.push(convertURLtoFile("https://www.muinfilm.shop/web/photo/"+$images[0].src.split("/")[4]))
-}
+var $image = document.querySelector('#img-export img')
 
-var files = []
-Promise.all(promises).then(function (values) {
-  files = values
+var file = null
+convertURLtoFile("https://www.muinfilm.shop/web/photo/"+$image.src.split("/")[4]).then(function (value) {
+  file = value
   $shareButton.disabled = false
 })
